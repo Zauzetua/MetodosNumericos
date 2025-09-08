@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetodosNumericos.UI", "MetodosNumericos.UI.csproj", "{6D21D0BB-4E25-4B19-B57F-03A8FC3F01F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetodosNumericos.Core", "..\MetodosNumericos.Core\MetodosNumericos.Core.csproj", "{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D21D0BB-4E25-4B19-B57F-03A8FC3F01F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D21D0BB-4E25-4B19-B57F-03A8FC3F01F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D21D0BB-4E25-4B19-B57F-03A8FC3F01F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D21D0BB-4E25-4B19-B57F-03A8FC3F01F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D84EEF30-17D8-4086-8C6F-80566B2FFF55}
+	EndGlobalSection
+EndGlobal
