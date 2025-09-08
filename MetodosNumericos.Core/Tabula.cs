@@ -34,6 +34,13 @@ namespace MetodosNumericos.Core
             double minY = double.MaxValue, maxY = double.MinValue;
             double minX = xi, maxX = xi;
 
+            if (incx <= 0)
+                throw new ArgumentException("El incremento debe ser mayor a 0.");
+            if (xi >= xf)
+                throw new ArgumentException("El valor inicial debe ser menor al valor final.");
+            if (funcion is null)
+                throw new ArgumentNullException(nameof(funcion), "La funcion no puede ser nula.");
+
             for (double x = xi; x <= xf; x += incx) //Recorrer  el rango
             {
                 double y = funcion(x);

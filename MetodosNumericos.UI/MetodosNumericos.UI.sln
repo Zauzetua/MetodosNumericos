@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetodosNumericos.UI", "MetodosNumericos.UI.csproj", "{6D21D0BB-4E25-4B19-B57F-03A8FC3F01F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetodosNumericos.UI", "MetodosNumericos.UI.csproj", "{6D21D0BB-4E25-4B19-B57F-03A8FC3F01F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetodosNumericos.Core", "..\MetodosNumericos.Core\MetodosNumericos.Core.csproj", "{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetodosNumericos.Core", "..\MetodosNumericos.Core\MetodosNumericos.Core.csproj", "{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetodosNumericos.Tests", "..\MetodosNumericos.Tests\MetodosNumericos.Tests.csproj", "{5F412DC1-533B-4E12-A13E-BA2B06D87D67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F412DC1-533B-4E12-A13E-BA2B06D87D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F412DC1-533B-4E12-A13E-BA2B06D87D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F412DC1-533B-4E12-A13E-BA2B06D87D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F412DC1-533B-4E12-A13E-BA2B06D87D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
