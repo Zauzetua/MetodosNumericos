@@ -16,8 +16,4 @@
     <ProjectReference Include="..\MetodosNumericos.Core\MetodosNumericos.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-
 </Project>

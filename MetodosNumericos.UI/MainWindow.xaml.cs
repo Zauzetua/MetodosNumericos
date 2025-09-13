@@ -19,6 +19,19 @@ namespace MetodosNumericos.UI
         public MainWindow()
         {
             InitializeComponent();
+
+            // Por defecto mostramos Tabulacion
+            MainContent.Content = new TabulacionView();
+        }
+
+        private void MenuItem_Tabulacion_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new TabulacionView();
+        }
+
+        private void MenuItem_OtraVista_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Errores(); // OtraVista debe ser un UserControl
         }
     }
 }
