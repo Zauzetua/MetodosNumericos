@@ -22,7 +22,7 @@ namespace MetodosNumericos.UI
                 //Obtener los valores de entrada
                 if (!double.TryParse(txtAprox.Text, out double valorAproximado))
                 {
-                    MessageBox.Show("Ingrese un numero valido en Valor Aproximado.");
+                    MessageBox.Show("Ingrese un numero valido en Valor Aproximado/Obtenido.");
                     return;
                 }
                 if (!double.TryParse(txtReal.Text, out double valorVerdadero))
