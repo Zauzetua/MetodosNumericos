@@ -20,18 +20,35 @@ namespace MetodosNumericos.UI
         {
             InitializeComponent();
 
-            // Por defecto mostramos Tabulacion
-            MainContent.Content = new TabulacionView();
         }
 
         private void MenuItem_Tabulacion_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new TabulacionView();
+            MainContent.Children.Clear();
+            var view = new TabulacionView();
+            Grid.SetRow(view, 0);
         }
 
-        private void MenuItem_OtraVista_Click(object sender, RoutedEventArgs e)
+
+        private void MenuItem_Errores_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new Errores(); // OtraVista debe ser un UserControl
+            MainContent.Children.Clear();
+            MainContent.Children.Add(new CalcularErrores());
+        }
+
+        private void btnTabular_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Children.Clear();
+            var view = new TabulacionView();
+            Grid.SetRow(view, 0);
+            Grid.SetColumn(view, 0);
+            MainContent.Children.Add(view);
+        }
+
+        private void btnErrores_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Children.Clear();
+            MainContent.Children.Add(new CalcularErrores());
         }
     }
 }

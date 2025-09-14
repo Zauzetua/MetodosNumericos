@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="MetodosNumericos.UI.CalcularErrores"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MetodosNumericos.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
+    <Grid>
+        <Label x:Name="lblReal" Content="Ingrese el valor verdadero:" HorizontalAlignment="Left" Margin="92,79,0,0" VerticalAlignment="Top" Width="250" FontFamily="Arial" FontSize="20"/>
+        <Label x:Name="lblAproximado" Content="Ingrese el valor obtenido:" HorizontalAlignment="Left" Margin="440,79,0,0" VerticalAlignment="Top" Width="254" FontFamily="Arial" FontSize="20" RenderTransformOrigin="-0.292,0.734"/>
+        <TextBox x:Name="txtReal" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="120,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" FontFamily="Arial" FontSize="20" Height="36" TextAlignment="Center"/>
+        <TextBox x:Name="txtAprox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="450,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" FontFamily="Arial" FontSize="20" Height="36" TextAlignment="Center"/>
+        <Grid HorizontalAlignment="Left" Height="155" Margin="45,225,0,0" VerticalAlignment="Top" Width="452">
+            <Label x:Name="lblErrorAbs" Content="El error verdadero es de:" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="20"/>
+            <Label x:Name="lblErrorRel" Content="El e. relativo % es de:" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Arial" FontSize="20" RenderTransformOrigin="0.192,0.679"/>
+            <TextBox x:Name="txtAbs" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="252,0,0,0" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="20" Height="36" IsEnabled="False" TextWrapping="Wrap" TextAlignment="Center"/>
+            <TextBox x:Name="txtRel" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="252,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="20" Height="36" IsEnabled="False" TextAlignment="Center"/>
+            <Label x:Name="lblErrorRel_Copiar" Content="El e. aproximado % es de:" HorizontalAlignment="Left" Margin="0,119,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="20" RenderTransformOrigin="0.192,0.679" Width="254"/>
+            <TextBox x:Name="txtRelPor" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="252,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="20" Height="36" IsEnabled="False" TextAlignment="Center"/>
+        </Grid>
+        <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="595,235,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="20" Click="btnCalcular_Click" Height="48" Width="116" Background="#FF0A04F9" Foreground="White"/>
+        <Button x:Name="btnReset" Content="Reiniciar" HorizontalAlignment="Left" Margin="595,311,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="20" Click="btnReset_Click" Height="52" Width="116" Background="#FF0A04F9" Foreground="White"/>
+        <Separator HorizontalAlignment="Left" Margin="-17,205,0,0" VerticalAlignment="Top" Height="4" RenderTransformOrigin="0.5,0.5" Width="817">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Label Content="Calcular Errores" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="24" FontWeight="Bold"/>
+
+    </Grid>
+</UserControl>

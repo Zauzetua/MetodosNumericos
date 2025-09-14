@@ -29,5 +29,17 @@ namespace MetodosNumericos.Core
             return Math.Abs((valorReal - ValorAproximado) / valorReal);
         }
 
+        /// <summary>
+        /// Metodo que toma el valor real y el valor aproximado y devuelve el error relativo porcentual
+        /// </summary>
+        /// <param name="valorReal"></param>
+        /// <param name="ValorAproximado"></param>
+        /// <returns></returns>
+        public double CalcularErrorAproximadoRelativoPorcentual(double valorReal, double ValorAproximado)
+        {
+            //error aproximado/ valor aproximado x 100%
+            return (Math.Abs(valorReal - ValorAproximado) / Math.Abs(ValorAproximado)) * 100;
+        }
+
     }
 }
