@@ -16,6 +16,14 @@ namespace MetodosNumericos.Core
         /// <returns>Error (real-aprox)</returns>
         public double CalcularErrorAbsoluto(double valorReal, double ValorAproximado)
         {
+            if (valorReal <= 0)
+            {
+                throw new ArgumentException("El valor real debe ser mayor a cero.", nameof(valorReal));
+            }
+            if (ValorAproximado <= 0)
+            {
+                throw new ArgumentException("El valor aproximado debe ser mayor a cero.", nameof(ValorAproximado));
+            }
             return Math.Abs(valorReal - ValorAproximado);
         }
         /// <summary>
@@ -26,6 +34,15 @@ namespace MetodosNumericos.Core
         /// <returns></returns>
         public double CalcularErrorRelativo(double valorReal, double ValorAproximado)
         {
+            //error absoluto/ valor real
+            if (valorReal <= 0)
+            {
+                throw new ArgumentException("El valor real debe ser mayor a cero.", nameof(valorReal));
+            }
+            if (ValorAproximado <= 0)
+            {
+                throw new ArgumentException("El valor aproximado debe ser mayor a cero.", nameof(ValorAproximado));
+            }
             return Math.Abs((valorReal - ValorAproximado) / valorReal);
         }
 
@@ -37,6 +54,14 @@ namespace MetodosNumericos.Core
         /// <returns></returns>
         public double CalcularErrorAproximadoRelativoPorcentual(double valorReal, double ValorAproximado)
         {
+            if (valorReal <= 0)
+            {
+                throw new ArgumentException("El valor real debe ser mayor a cero.", nameof(valorReal));
+            }
+            if (ValorAproximado <= 0)
+            {
+                throw new ArgumentException("El valor aproximado debe ser mayor a cero.", nameof(ValorAproximado));
+            }
             //error aproximado/ valor aproximado x 100%
             return (Math.Abs(valorReal - ValorAproximado) / Math.Abs(ValorAproximado)) * 100;
         }
