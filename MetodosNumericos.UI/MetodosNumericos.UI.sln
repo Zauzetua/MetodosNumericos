@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetodosNumericos.UI", "Meto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetodosNumericos.Core", "..\MetodosNumericos.Core\MetodosNumericos.Core.csproj", "{EE977A93-EE91-4DDD-82B8-A3723FA9DF43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetodosNumericos.Tests", "..\MetodosNumericos.Tests\MetodosNumericos.Tests.csproj", "{5F412DC1-533B-4E12-A13E-BA2B06D87D67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetodosNumericos.Tests", "..\MetodosNumericos.Tests\MetodosNumericos.Tests.csproj", "{5F412DC1-533B-4E12-A13E-BA2B06D87D67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
