@@ -32,23 +32,23 @@ namespace MetodosNumericos.UI
                 //Obtener los valores de entrada
                 if (!double.TryParse(txtXi.Text, out double xi))
                 {
-                    MessageBox.Show("Ingrese un numero valido en Xi.");
+                    MessageBox.Show("Ingrese un numero valido en Xi.", "Error");
                     return;
                 }
                 if (!double.TryParse(txtXf.Text, out double xf))
                 {
-                    MessageBox.Show("Ingrese un numero valido en Xf.");
+                    MessageBox.Show("Ingrese un numero valido en Xf.", "Error");
                     return;
                 }
                 if (!double.TryParse(txtIncx.Text, out double incx) || incx <= 0)
                 {
-                    MessageBox.Show("Ingrese un incremento valido (mayor a 0).");
+                    MessageBox.Show("Ingrese un incremento valido (mayor a 0).", "Error");
                     return;
                 }
                 //Validar el rango
                 if (xi >= xf)
                 {
-                    MessageBox.Show("Xi debe ser menor que Xf.");
+                    MessageBox.Show("Xi debe ser menor que Xf.", "Error");
                     return;
                 }
 
@@ -60,7 +60,7 @@ namespace MetodosNumericos.UI
                     f = x => Math.Pow(x, 2) * Math.Sqrt(Math.Abs(Math.Cos(x))) - 5; // y = x^2 * sqrt(|cos(x)|) - 5
                 else
                 {
-                    MessageBox.Show("Seleccione una funcion valida.");
+                    MessageBox.Show("Seleccione una funcion valida.", "Error");
                     return;
                 }
 

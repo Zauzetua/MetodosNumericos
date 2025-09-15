@@ -9,14 +9,16 @@
             <MenuItem Header="Vistas">
                 <MenuItem Header="Tabulacion" Click="MenuItem_Tabulacion_Click"/>
                 <MenuItem Header="Errores" Click="MenuItem_Errores_Click"/>
+                <MenuItem Header="Raices" Click="MenuItem_Raices_Click"/>
             </MenuItem>
         </Menu>
 
         <Grid x:Name="MainContent" Height="418" Width="803">
-            <Button x:Name="btnTabular" Content="Tabulacion de funciones" Width="227" Height="56" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.48,2.349" FontFamily="Arial" FontSize="18" Foreground="White" Background="#FF0033FF" Click="btnTabular_Click"/>
+            <Button x:Name="btnTabular" Content="Tabulacion de funciones" Width="210" Height="56" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.48,2.349" FontFamily="Arial" FontSize="18" Foreground="White" Background="#FF0033FF" Click="btnTabular_Click" Margin="0,153,0,0"/>
             <Label Content="¡Bienvenido!" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="36" RenderTransformOrigin="0.32,0.488"/>
             <Label Content="Por favor, selecciona una opcion" HorizontalAlignment="Center" Margin="0,109,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18"/>
-            <Button x:Name="btnErrores" Content="Calcular errores" Width="210" Height="57" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,273,0,0" RenderTransformOrigin="0.48,2.349" FontFamily="Arial" FontSize="18" Foreground="White" Background="#FF0033FF" Click="btnErrores_Click"/>
+            <Button x:Name="btnErrores" Content="Calcular errores" Width="210" Height="57" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,236,0,0" RenderTransformOrigin="0.48,2.349" FontFamily="Arial" FontSize="18" Foreground="White" Background="#FF0033FF" Click="btnErrores_Click"/>
+            <Button x:Name="btnRaices" Content="Raices de funcion" HorizontalAlignment="Center" Margin="0,322,0,0" VerticalAlignment="Top" Height="57" Width="210" Foreground="White" Background="#FF0033FF" FontFamily="Arial" FontSize="18" Click="btnRaices_Click"/>
         </Grid>
     </DockPanel>
 </Window>

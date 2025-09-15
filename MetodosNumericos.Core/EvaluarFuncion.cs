@@ -16,6 +16,31 @@ namespace MetodosNumericos.Core
             return Regex.Replace(funcion, pattern, "Pow($1,$2)");
         }
 
+
+        public static string InsertarMultiplicacion(string funcion)
+        {
+            //4x → 4*x
+            funcion = Regex.Replace(funcion, @"(\d)(x)", "$1*$2", RegexOptions.IgnoreCase);
+
+            // x2 → x*2
+            funcion = Regex.Replace(funcion, @"(x)(\d)", "$1*$2", RegexOptions.IgnoreCase);
+
+            // x(2+3) → x*(2+3)
+            funcion = Regex.Replace(funcion, @"(x)\(", "$1*(", RegexOptions.IgnoreCase);
+
+            //3(2+1) → 3*(2+1)
+            funcion = Regex.Replace(funcion, @"(\d)\(", "$1*(");
+
+            return funcion;
+        }
+
+
+        public static string ConvertirAbs(string funcion)
+        {
+            return Regex.Replace(funcion, @"\|([^|]+)\|", "Abs($1)");
+        }
+
+
         public static string NormalizarFunciones(string funcion)
         {
             funcion = Regex.Replace(funcion, @"\babs\b", "Abs", RegexOptions.IgnoreCase);
@@ -29,8 +54,10 @@ namespace MetodosNumericos.Core
 
         public static double Evaluar(string funcion, double x)
         {
+            funcion = InsertarMultiplicacion(funcion);
             funcion = ConvertirPotencias(funcion);
             funcion = NormalizarFunciones(funcion);
+            funcion = ConvertirAbs(funcion);
             var expresion = new NCalc.Expression(funcion);
             expresion.Parameters["x"] = x;
             return Convert.ToDouble(expresion.Evaluate());

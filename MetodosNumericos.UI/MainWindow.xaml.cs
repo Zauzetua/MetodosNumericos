@@ -30,6 +30,15 @@ namespace MetodosNumericos.UI
             MainContent.Children.Add(new CalcularErrores());
         }
 
+        private void MenuItem_Raices_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Children.Clear();
+            var view = new Raices();
+            Grid.SetRow(view, 0);
+            Grid.SetColumn(view, 0);
+            MainContent.Children.Add(view);
+        }
+
         private void btnTabular_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Children.Clear();
@@ -41,8 +50,23 @@ namespace MetodosNumericos.UI
 
         private void btnErrores_Click(object sender, RoutedEventArgs e)
         {
+
             MainContent.Children.Clear();
-            MainContent.Children.Add(new CalcularErrores());
+            var view = new CalcularErrores();
+            Grid.SetRow(view, 0);
+            Grid.SetColumn(view, 0);
+            MainContent.Children.Add(view);
+
+        }
+
+        private void btnRaices_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Children.Clear();
+            var view = new Raices();
+            Grid.SetRow(view, 0);
+            Grid.SetColumn(view, 0);
+            MainContent.Children.Add(view);
+
         }
     }
 }

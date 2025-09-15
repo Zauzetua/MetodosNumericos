@@ -22,23 +22,23 @@ namespace MetodosNumericos.UI
                 //Obtener los valores de entrada
                 if (!double.TryParse(txtAprox.Text, out double valorAproximado))
                 {
-                    MessageBox.Show("Ingrese un numero valido en Valor Aproximado/Obtenido.");
+                    MessageBox.Show("Ingrese un numero valido en Valor Aproximado/Obtenido.", "Error");
                     return;
                 }
                 if (!double.TryParse(txtReal.Text, out double valorVerdadero))
                 {
-                    MessageBox.Show("Ingrese un numero valido en Valor Verdadero.");
+                    MessageBox.Show("Ingrese un numero valido en Valor Verdadero.", "Error");
                     return;
                 }
                 //Validar que los valores no sean cero para evitar division por cero
                 if (valorVerdadero<=0)
                 {
-                    MessageBox.Show("El Valor Verdadero debe ser mayor a cero.");
+                    MessageBox.Show("El Valor Verdadero debe ser mayor a cero.", "Error");
                     return;
                 }
                 if (valorAproximado <= 0)
                 {
-                    MessageBox.Show("El Valor Aproximado debe ser mayor a cero.");
+                    MessageBox.Show("El Valor Aproximado debe ser mayor a cero.", "Error");
                     return;
                 }
 
@@ -54,7 +54,7 @@ namespace MetodosNumericos.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ocurrio un error: {ex.Message}");
+                MessageBox.Show($"Ocurrio un error: {ex.Message}","Error");
             }
 
         }
