@@ -11,17 +11,39 @@ namespace MetodosNumericos.Core
         int Iteraciones { get; set; }
 
         /// <summary>
-        /// Funcion que implementa el metodo de biseccion, devuelve el valor de la raiz y el numero de iteraciones
+        /// Clase que representa el resultado de cada iteracion para encontrar raices.
+        /// </summary>
+        public class ResultadoIteracion
+        {
+            public int Iteracion { get; set; }
+            public double Xi { get; set; }
+            public double Xf { get; set; }
+            public double Xr { get; set; }
+            public double Fxi { get; set; }
+            public double Fxf { get; set; }
+            public double Fxr { get; set; }
+            public double FxiFxr { get; set; }
+            public double Ea { get; set; }
+        }
+
+        /// <summary>
+        /// Funcion que implementa el metodo de biseccion, devuelve una lista con los resultados de cada iteracion
         /// </summary>
         /// <param name="funcion"></param>
         /// <param name="xi"></param>
         /// <param name="xf"></param>
         /// <param name="eamax"></param>
         /// <returns></returns>
-        public (double raiz, int iteraciones) Biseccion(string funcion, double xi, double xf, double eamax)
+        public List<ResultadoIteracion> Biseccion(string funcion, double xi, double xf, double eamax)
         {
             try
             {
+                if (funcion is null || funcion.Equals(""))
+                {
+                    throw new ArgumentException("La funcion no puede estar vacia");
+
+                }
+                var resultados = new List<ResultadoIteracion>();
                 double xr = 0;
                 double ea = 100;
                 Iteraciones = 0;
@@ -50,7 +72,28 @@ namespace MetodosNumericos.Core
 
                     var fXr = EvaluarFuncion.Evaluar(funcion, xr);
                     fXi = EvaluarFuncion.Evaluar(funcion, xi);
+                    fXf = EvaluarFuncion.Evaluar(funcion, xf);
+                    resultados.Add(new ResultadoIteracion
+                    {
+                        Iteracion = Iteraciones,
+                        Xi = xi,
+                        Xf = xf,
+                        Xr = xr,
+                        Fxi = fXi,
+                        Fxf = fXf,
+                        Fxr = fXr,
+                        Ea = ea,
+                        FxiFxr = fXi * fXr
+                    });
 
+
+
+                    if (Math.Abs(fXr) < eamax)
+                    {
+                        ea = eamax;
+                        //resultados.Last().Ea = ea;
+                        break;
+                    }
 
                     if (xr != 0)
                     {
@@ -60,14 +103,17 @@ namespace MetodosNumericos.Core
                     if (fXi * fXr < 0)
                     {
                         xf = xr;
+                        fXf = EvaluarFuncion.Evaluar(funcion, xf);
                     }
                     else
                     {
                         xi = xr;
+                        fXi = EvaluarFuncion.Evaluar(funcion, xi);
                     }
+
                 }
 
-                return (xr, Iteraciones);
+                return (resultados);
             }
             catch (ArgumentException)
             {
@@ -94,7 +140,7 @@ namespace MetodosNumericos.Core
         /// <param name="eamax"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public (double raiz, int iteraciones) ReglaFalsa(string funcion, double xi, double xf, double eamax)
+        public List<ResultadoIteracion> ReglaFalsa(string funcion, double xi, double xf, double eamax)
         {
             try
             {
@@ -107,7 +153,7 @@ namespace MetodosNumericos.Core
                 {
                     throw new ArgumentException("El error maximo permitido debe de ser mayor que 0");
                 }
-
+                var resultados = new List<ResultadoIteracion>();
                 double xr = 0;
                 double ea = 100;
                 Iteraciones = 0;
@@ -128,6 +174,26 @@ namespace MetodosNumericos.Core
 
                     var fXr = EvaluarFuncion.Evaluar(funcion, xr);
                     fXi = EvaluarFuncion.Evaluar(funcion, xi);
+                    fXf = EvaluarFuncion.Evaluar(funcion, xf);
+                    resultados.Add(new ResultadoIteracion
+                    {
+                        Iteracion = Iteraciones,
+                        Xi = xi,
+                        Xf = xf,
+                        Xr = xr,
+                        Fxi = fXi,
+                        Fxf = fXf,
+                        Fxr = fXr,
+                        Ea = ea,
+                        FxiFxr = fXi * fXr
+                    });
+
+                    if (Math.Abs(fXr) < eamax)
+                    {
+                        ea = eamax;
+                        //resultados.Last().Ea = ea;
+                        break;
+                    }
 
                     if (xr != 0)
                     {
@@ -146,7 +212,7 @@ namespace MetodosNumericos.Core
                     }
                 }
 
-                return (xr, Iteraciones);
+                return (resultados);
 
 
             }
@@ -167,6 +233,32 @@ namespace MetodosNumericos.Core
 
 
 
+        }
+
+        /// <summary>
+        /// Metodo que formatea los resultados a 4 decimales.
+        /// </summary>
+        /// <param name="resultados"></param>
+        /// <returns></returns>
+        
+        public List<ResultadoIteracion> NewtonRaphson(string funcion, double xi, double eamax)
+        {
+            throw new NotImplementedException();
+        }
+        public List<ResultadoIteracion> FormatearResultados(List<ResultadoIteracion> resultados)
+        {
+            return resultados.Select(r => new ResultadoIteracion
+            {
+                Iteracion = r.Iteracion,
+                Xi = Math.Round(r.Xi, 4),
+                Xf = Math.Round(r.Xf, 4),
+                Xr = Math.Round(r.Xr, 4),
+                Fxi = Math.Round(r.Fxi, 4),
+                Fxf = Math.Round(r.Fxf, 4),
+                Fxr = Math.Round(r.Fxr, 4),
+                Ea = Math.Round(r.Ea, 4),
+                FxiFxr = Math.Round(r.FxiFxr, 4)
+            }).ToList();
         }
     }
 }

@@ -19,7 +19,7 @@
         <Label Content="Ingrese la funcion:" HorizontalAlignment="Left" Margin="192,143,0,0" VerticalAlignment="Top" Width="132" FontFamily="Arial" FontWeight="Bold" Height="26" FontSize="14"/>
         <Label Content="Ingrese el e. maximo:" HorizontalAlignment="Left" Margin="18,143,0,0" VerticalAlignment="Top" Width="156" FontFamily="Arial" FontWeight="Bold" Height="36" RenderTransformOrigin="0.523,0.293" FontSize="14"/>
         <Label Content="Raiz" HorizontalAlignment="Left" Margin="559,57,0,0" VerticalAlignment="Top" Width="164" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
-        <TextBox x:Name="txtRaiz" HorizontalAlignment="Left" Margin="422,398,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Height="30" FontFamily="Arial" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
+        <TextBox x:Name="txtRaiz" HorizontalAlignment="Left" Margin="626,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Height="30" FontFamily="Arial" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
         <Label x:Name="lblIteraciones" Content="" HorizontalAlignment="Left" Margin="499,233,0,0" VerticalAlignment="Top" Width="168" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
         <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="34,327,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" Click="btnCalcular_Click"/>
         <Button x:Name="btnReiniciar" Content="Reiniciar" HorizontalAlignment="Left" Margin="192,327,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" RenderTransformOrigin="0.968,0.574" Click="btnReiniciar_Click"/>
@@ -38,14 +38,15 @@
           AutoGenerateColumns="False"
           HeadersVisibility="Column"
           CanUserAddRows="False"
-          IsReadOnly="True">
+          IsReadOnly="True" FontFamily="Arial">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Xi" Width="*"/>
-                <DataGridTextColumn Header="Xf" Width="*"/>
-                <DataGridTextColumn Header="Xf" Width="*"/>
-                <DataGridTextColumn Header="f(Xi)" Width="*"/>
-                <DataGridTextColumn Header="f(Xr)"  Width="*"/>
-                <DataGridTextColumn Header="ea"  Width="*"/>
+                <DataGridTextColumn Header="Xi" Width="*" Binding="{Binding Xi}"/>
+                <DataGridTextColumn Header="Xf" Width="*" Binding="{Binding Xf}"/>
+                <DataGridTextColumn Header="Xr" Width="*" Binding="{Binding Xr}"/>
+                <DataGridTextColumn Header="f(Xi)" Width="*" Binding="{Binding Fxi}"/>
+                <DataGridTextColumn Header="f(Xr)"  Width="*" Binding="{Binding Fxr}"/>
+                <DataGridTextColumn Header="f(Xi)*f(Xr)"  Width="*" Binding="{Binding FxiFxr}"/>
+                <DataGridTextColumn Header="ea"  Width="*" Binding="{Binding Ea}"/>
             </DataGrid.Columns>
         </DataGrid>
 

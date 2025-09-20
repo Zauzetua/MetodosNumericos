@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static MetodosNumericos.Core.RaicesFuncion;
 
 namespace MetodosNumericos.UI
 {
@@ -55,23 +56,28 @@ namespace MetodosNumericos.UI
                 }
                 var raices = new RaicesFuncion();
                 var opcion = cbxMetodo.SelectedIndex;
-                (double raiz, double iteraciones) resultados;
+                List<ResultadoIteracion> resultadosPorIteracion = [];
+
                 if (opcion == 0)
                 {
-                    resultados = raices.Biseccion(txtFuncion.Text, xi, xf, error);
+                    resultadosPorIteracion = raices.Biseccion(txtFuncion.Text, xi, xf, error);
                 }
                 else if (opcion == 1)
                 {
-                    resultados = raices.ReglaFalsa(txtFuncion.Text, xi, xf, error);
+                    resultadosPorIteracion = raices.ReglaFalsa(txtFuncion.Text, xi, xf, error);
                 }
                 else
                 {
                     MessageBox.Show("Seleccione un metodo.", "Error");
                     return;
                 }
-
-                txtRaiz.Text = resultados.raiz.ToString("G6");
-                //lblIteraciones.Content = "Iteraciones: " + resultados.iteraciones.ToString();
+                if(resultadosPorIteracion.Last().Ea > error)
+                {
+                    MessageBox.Show("Se encontro la raiz. Pero no se llego al criterio de error maximo permitido.","Atencion");
+                }
+                var formateados = raices.FormatearResultados(resultadosPorIteracion);
+                dgTabla.ItemsSource = formateados;
+                txtRaiz.Text = resultadosPorIteracion.Last().Xr.ToString("G6");
 
             }
             catch (Exception ex)
