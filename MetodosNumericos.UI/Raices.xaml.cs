@@ -71,7 +71,7 @@ namespace MetodosNumericos.UI
                 }
 
                 txtRaiz.Text = resultados.raiz.ToString("G6");
-                lblIteraciones.Content = "Iteraciones: " + resultados.iteraciones.ToString();
+                //lblIteraciones.Content = "Iteraciones: " + resultados.iteraciones.ToString();
 
             }
             catch (Exception ex)

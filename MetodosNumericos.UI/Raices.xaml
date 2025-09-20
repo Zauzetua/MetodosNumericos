@@ -9,27 +9,45 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <Grid>
-        <TextBox x:Name="txtXi" HorizontalAlignment="Left" Margin="186,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" FontFamily="Arial" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="txtXf" HorizontalAlignment="Left" Margin="187,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" FontFamily="Arial" FontSize="20"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="txtError" HorizontalAlignment="Left" Margin="187,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" FontFamily="Arial" FontSize="20"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="txtFuncion" HorizontalAlignment="Left" Margin="188,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" FontFamily="Arial" FontSize="16"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25"/>
-        <Label Content="Encontrar Raices de Funcion" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="24" FontWeight="Bold"/>
-        <Label Content="Ingrese Xi:" HorizontalAlignment="Left" Margin="35,46,0,0" VerticalAlignment="Top" Width="123" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
-        <Label Content="Ingrese Xf:" HorizontalAlignment="Left" Margin="36,103,0,0" VerticalAlignment="Top" Width="123" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
-        <Label Content="Ingrese la &#xA;funcion:" HorizontalAlignment="Left" Margin="37,150,0,0" VerticalAlignment="Top" Width="123" FontFamily="Arial" FontSize="20" FontWeight="Bold" Height="62"/>
-        <Label Content="Ingrese el &#xA;error maximo:" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top" Width="147" FontFamily="Arial" FontSize="20" FontWeight="Bold" Height="61" RenderTransformOrigin="0.523,0.293"/>
-        <Label Content="La raiz esta en:" HorizontalAlignment="Left" Margin="520,88,0,0" VerticalAlignment="Top" Width="164" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
-        <TextBox x:Name="txtRaiz" HorizontalAlignment="Left" Margin="529,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Height="30" FontFamily="Arial" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-        <Label x:Name="lblIteraciones" Content="" HorizontalAlignment="Left" Margin="515,182,0,0" VerticalAlignment="Top" Width="168" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
-        <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="461,292,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" Click="btnCalcular_Click"/>
-        <Button x:Name="btnReiniciar" Content="Reiniciar" HorizontalAlignment="Left" Margin="628,292,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" RenderTransformOrigin="0.968,0.574" Click="btnReiniciar_Click"/>
-        <Label Content="f(x) =" HorizontalAlignment="Left" Margin="150,168,0,0" VerticalAlignment="Top"/>
-        <Label Content="Escoga &#xD;&#xA;metodo:" HorizontalAlignment="Left" Margin="37,278,0,0" VerticalAlignment="Top" Width="132" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
-        <ComboBox x:Name="cbxMetodo" HorizontalAlignment="Left" Margin="188,295,0,0" VerticalAlignment="Top" Width="172" FontFamily="Arial" FontSize="20" SelectedIndex="0">
+        <TextBox x:Name="txtXi" HorizontalAlignment="Left" Margin="23,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="22"/>
+        <TextBox x:Name="txtXf" HorizontalAlignment="Left" Margin="198,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" FontFamily="Arial"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="22"/>
+        <TextBox x:Name="txtError" HorizontalAlignment="Left" Margin="24,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" FontFamily="Arial"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="22"/>
+        <TextBox x:Name="txtFuncion" HorizontalAlignment="Left" Margin="198,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" FontFamily="Arial"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="22"/>
+        <Label Content="Encontrar Raices de Funcion" HorizontalAlignment="Center" Margin="0,3,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="24" FontWeight="Bold"/>
+        <Label Content="Ingrese Xi:" HorizontalAlignment="Left" Margin="18,52,0,0" VerticalAlignment="Top" Width="125" FontFamily="Arial" FontWeight="Bold" Height="28" FontSize="14"/>
+        <Label Content="Ingrese Xf:" HorizontalAlignment="Left" Margin="192,52,0,0" VerticalAlignment="Top" Width="125" FontFamily="Arial" FontWeight="Bold" Height="28" FontSize="14"/>
+        <Label Content="Ingrese la funcion:" HorizontalAlignment="Left" Margin="192,143,0,0" VerticalAlignment="Top" Width="132" FontFamily="Arial" FontWeight="Bold" Height="26" FontSize="14"/>
+        <Label Content="Ingrese el e. maximo:" HorizontalAlignment="Left" Margin="18,143,0,0" VerticalAlignment="Top" Width="156" FontFamily="Arial" FontWeight="Bold" Height="36" RenderTransformOrigin="0.523,0.293" FontSize="14"/>
+        <Label Content="Raiz" HorizontalAlignment="Left" Margin="559,57,0,0" VerticalAlignment="Top" Width="164" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
+        <TextBox x:Name="txtRaiz" HorizontalAlignment="Left" Margin="422,398,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Height="30" FontFamily="Arial" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
+        <Label x:Name="lblIteraciones" Content="" HorizontalAlignment="Left" Margin="499,233,0,0" VerticalAlignment="Top" Width="168" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
+        <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="34,327,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" Click="btnCalcular_Click"/>
+        <Button x:Name="btnReiniciar" Content="Reiniciar" HorizontalAlignment="Left" Margin="192,327,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" RenderTransformOrigin="0.968,0.574" Click="btnReiniciar_Click"/>
+        <Label Content="f(x) =" HorizontalAlignment="Left" Margin="159,179,0,0" VerticalAlignment="Top" Height="22" Width="39"/>
+        <Label Content="Escoga metodo:" HorizontalAlignment="Left" Margin="129,227,0,0" VerticalAlignment="Top" Width="134" FontFamily="Arial" FontWeight="Bold" Height="57" FontSize="14"/>
+        <ComboBox x:Name="cbxMetodo" HorizontalAlignment="Left" Margin="135,258,0,0" VerticalAlignment="Top" Width="86" FontFamily="Arial" SelectedIndex="0" Height="26">
             <System:String>Biseccion</System:String>
             <System:String>Regla Falsa</System:String>
         </ComboBox>
-        <Button x:Name="btnAyuda" Content="?" HorizontalAlignment="Center" Margin="0,164,0,0" VerticalAlignment="Top" Background="#FF4D6FF9" Foreground="White" Height="35" Width="35" FontFamily="Arial" FontSize="20" Click="btnAyuda_Click"/>
+        <Button x:Name="btnAyuda" Content="?" HorizontalAlignment="Left" Margin="53,8,0,0" VerticalAlignment="Top" Background="#FF4D6FF9" Foreground="White" Height="30" Width="34" FontFamily="Arial" FontSize="20" Click="btnAyuda_Click"/>
+        <Rectangle HorizontalAlignment="Left" Height="254" Margin="10,42,0,0" Stroke="Black" VerticalAlignment="Top" Width="328" Opacity="0.6"/>
+        <Rectangle HorizontalAlignment="Left" Height="78" Margin="10,309,0,0" Stroke="Black" VerticalAlignment="Top" Width="328" Opacity="0.6"/>
+
+        <DataGrid x:Name="dgTabla" 
+          Margin="351,98,22,81"
+          AutoGenerateColumns="False"
+          HeadersVisibility="Column"
+          CanUserAddRows="False"
+          IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Xi" Width="*"/>
+                <DataGridTextColumn Header="Xf" Width="*"/>
+                <DataGridTextColumn Header="Xf" Width="*"/>
+                <DataGridTextColumn Header="f(Xi)" Width="*"/>
+                <DataGridTextColumn Header="f(Xr)"  Width="*"/>
+                <DataGridTextColumn Header="ea"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </UserControl>
