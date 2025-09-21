@@ -4,6 +4,11 @@ namespace MetodosNumericos.Core
 {
     public class Funciones
     {
+        /// <summary>
+        /// Metodo que convierte una funcion en string a un delegado Func<double, double>
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <returns></returns>
         public Func<double, double> ConvertirAFunc(string funcion)
         {
             funcion = EvaluarFuncion.InsertarMultiplicacion(funcion);
@@ -11,7 +16,7 @@ namespace MetodosNumericos.Core
             funcion = EvaluarFuncion.NormalizarFunciones(funcion);
             funcion = EvaluarFuncion.ConvertirAbs(funcion);
 
-            // Parsear la función usando NCalc
+            // Parsear la funcion usando NCalc
             var expr = new Expression(funcion);
             
 

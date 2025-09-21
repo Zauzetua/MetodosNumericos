@@ -4,6 +4,11 @@ namespace MetodosNumericos.Core
 {
     public class EvaluarFuncion
     {
+        /// <summary>
+        /// Funcion tipo regex que convierte las potencias de la forma a^b en Pow(a,b). Es de apoyo para NCalc
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <returns></returns>
         public static string ConvertirPotencias(string funcion)
         {
             // Expresión regular básica para detectar a^b
@@ -12,6 +17,11 @@ namespace MetodosNumericos.Core
         }
 
 
+        /// <summary>
+        /// Funcion tipo regex que inserta los signos de multiplicacion donde se omiten. Es de apoyo para NCalc
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <returns></returns>
         public static string InsertarMultiplicacion(string funcion)
         {
             //4x → 4*x
@@ -29,13 +39,21 @@ namespace MetodosNumericos.Core
             return funcion;
         }
 
-
+        /// <summary>
+        /// Funcion tipo regex que convierte abs(...) en Abs(x). Es de apoyo para NCalc. Medio inutil
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <returns></returns>
         public static string ConvertirAbs(string funcion)
         {
             return Regex.Replace(funcion, @"\|([^|]+)\|", "Abs($1)");
         }
 
-
+        /// <summary>
+        /// Funcion que normaliza las funciones matematicas a la notacion de NCalc
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <returns></returns>
         public static string NormalizarFunciones(string funcion)
         {
             funcion = Regex.Replace(funcion, @"\babs\b", "Abs", RegexOptions.IgnoreCase);
@@ -47,6 +65,11 @@ namespace MetodosNumericos.Core
             return funcion;
         }
 
+        /// <summary>
+        /// Funcion que normaliza una funcion para que pueda ser evaluada por NCalc
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <returns></returns>
         public static string NormalizarFuncion(string funcion)
         {
             funcion = InsertarMultiplicacion(funcion);
@@ -56,12 +79,15 @@ namespace MetodosNumericos.Core
             return funcion;
         }
 
+        /// <summary>
+        /// Funcion que evalua una funcion en un punto x
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static double Evaluar(string funcion, double x)
         {
-            funcion = InsertarMultiplicacion(funcion);
-            funcion = ConvertirPotencias(funcion);
-            funcion = NormalizarFunciones(funcion);
-            funcion = ConvertirAbs(funcion);
+            funcion = NormalizarFuncion(funcion);
             var expresion = new NCalc.Expression(funcion);
             expresion.Parameters["x"] = x;
             return Convert.ToDouble(expresion.Evaluate());

@@ -2,6 +2,9 @@
 {
     public class RaicesFuncion
     {
+        /// <summary>
+        /// Propiedad que almacena el numero de iteraciones realizadas en el metodo.
+        /// </summary>
         int Iteraciones { get; set; }
 
         /// <summary>
