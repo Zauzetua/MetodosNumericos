@@ -5,7 +5,7 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" FontFamily="Arial" FontSize="18">
             <MenuItem Header="Vistas">
                 <MenuItem Header="Tabulacion" Click="MenuItem_Tabulacion_Click"/>
                 <MenuItem Header="Errores" Click="MenuItem_Errores_Click"/>

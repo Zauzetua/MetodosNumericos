@@ -12,7 +12,7 @@ namespace MetodosNumericos.Core
         public double Derivar(Func<double, double> f, double x)
         {
             double h = 1e-6;
-            var resultado = (f(x + h) - f(x - h)) / (2 * h);
+            var resultado = (f(x + h) - f(x - h)) / (h);
             return resultado;
         }
     }

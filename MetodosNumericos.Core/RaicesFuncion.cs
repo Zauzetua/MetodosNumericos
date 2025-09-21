@@ -316,6 +316,15 @@ namespace MetodosNumericos.Core
             }
         }
 
+        /// <summary>
+        /// Metodo que implementa el metodo de la secante para encontrar raices, devuelve una lista con los resultados de cada iteracion
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <param name="xi"></param>
+        /// <param name="xf"></param>
+        /// <param name="eamax"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<ResultadoIteracion> Secante(string funcion, double xi, double xf, double eamax)
         {
             try
@@ -398,8 +407,6 @@ namespace MetodosNumericos.Core
                 throw new Exception("Error al evaluar la funcion: " + ex.Message);
             }
         }
-
-
 
         /// <summary>
         /// Metodo que formatea los resultados a 4 decimales.
