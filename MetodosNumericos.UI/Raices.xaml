@@ -21,17 +21,19 @@
         <Label Content="Raiz" HorizontalAlignment="Left" Margin="559,57,0,0" VerticalAlignment="Top" Width="164" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
         <TextBox x:Name="txtRaiz" HorizontalAlignment="Left" Margin="626,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Height="30" FontFamily="Arial" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
         <Label x:Name="lblIteraciones" Content="" HorizontalAlignment="Left" Margin="499,233,0,0" VerticalAlignment="Top" Width="168" FontFamily="Arial" FontSize="20" FontWeight="Bold"/>
-        <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="34,327,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" Click="btnCalcular_Click"/>
-        <Button x:Name="btnReiniciar" Content="Reiniciar" HorizontalAlignment="Left" Margin="192,327,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" RenderTransformOrigin="0.968,0.574" Click="btnReiniciar_Click"/>
+        <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="38,327,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" Click="btnCalcular_Click"/>
+        <Button x:Name="btnReiniciar" Content="Reiniciar" HorizontalAlignment="Left" Margin="196,327,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" RenderTransformOrigin="0.968,0.574" Click="btnReiniciar_Click"/>
         <Label Content="f(x) =" HorizontalAlignment="Left" Margin="159,179,0,0" VerticalAlignment="Top" Height="22" Width="39"/>
         <Label Content="Escoga metodo:" HorizontalAlignment="Left" Margin="129,227,0,0" VerticalAlignment="Top" Width="134" FontFamily="Arial" FontWeight="Bold" Height="57" FontSize="14"/>
-        <ComboBox x:Name="cbxMetodo" HorizontalAlignment="Left" Margin="135,258,0,0" VerticalAlignment="Top" Width="86" FontFamily="Arial" SelectedIndex="0" Height="26">
+        <ComboBox x:Name="cbxMetodo" HorizontalAlignment="Left" Margin="135,258,0,0" VerticalAlignment="Top" Width="86" FontFamily="Arial" SelectedIndex="0" Height="26" SelectionChanged="cbxMetodo_SelectionChanged">
             <System:String>Biseccion</System:String>
             <System:String>Regla Falsa</System:String>
+            <System:String>Newton-Rhapson</System:String>
+            <System:String>Secante</System:String>
         </ComboBox>
         <Button x:Name="btnAyuda" Content="?" HorizontalAlignment="Left" Margin="53,8,0,0" VerticalAlignment="Top" Background="#FF4D6FF9" Foreground="White" Height="30" Width="34" FontFamily="Arial" FontSize="20" Click="btnAyuda_Click"/>
-        <Rectangle HorizontalAlignment="Left" Height="254" Margin="10,42,0,0" Stroke="Black" VerticalAlignment="Top" Width="328" Opacity="0.6"/>
-        <Rectangle HorizontalAlignment="Left" Height="78" Margin="10,309,0,0" Stroke="Black" VerticalAlignment="Top" Width="328" Opacity="0.6"/>
+        <Rectangle HorizontalAlignment="Left" Height="254" Margin="14,46,0,0" Stroke="Black" VerticalAlignment="Top" Width="328" Opacity="0.6"/>
+        <Rectangle HorizontalAlignment="Left" Height="78" Margin="14,309,0,0" Stroke="Black" VerticalAlignment="Top" Width="328" Opacity="0.6"/>
 
         <DataGrid x:Name="dgTabla" 
           Margin="351,98,22,81"

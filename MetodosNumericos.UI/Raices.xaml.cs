@@ -34,7 +34,7 @@ namespace MetodosNumericos.UI
             {
                 if (!double.TryParse(txtXi.Text, out double xi))
                 {
-                    MessageBox.Show("Ingrese un numero valido en Xi.","Error");
+                    MessageBox.Show("Ingrese un numero valido en Xi.", "Error");
                     return;
                 }
                 if (!double.TryParse(txtXf.Text, out double xf))
@@ -66,14 +66,22 @@ namespace MetodosNumericos.UI
                 {
                     resultadosPorIteracion = raices.ReglaFalsa(txtFuncion.Text, xi, xf, error);
                 }
+                else if (opcion == 2)
+                {
+                    resultadosPorIteracion = raices.NewtonRaphson(txtFuncion.Text, xi, error);
+                }
+                else if (opcion == 3)
+                {
+                    resultadosPorIteracion = raices.Secante(txtFuncion.Text, xi, xf, error);
+                }
                 else
                 {
                     MessageBox.Show("Seleccione un metodo.", "Error");
                     return;
                 }
-                if(resultadosPorIteracion.Last().Ea > error)
+                if (resultadosPorIteracion.Last().Ea > error)
                 {
-                    MessageBox.Show("Se encontro la raiz. Pero no se llego al criterio de error maximo permitido.","Atencion");
+                    MessageBox.Show("Se encontro la raiz. Pero no se llego al criterio de error maximo permitido.", "Atencion");
                 }
                 var formateados = raices.FormatearResultados(resultadosPorIteracion);
                 dgTabla.ItemsSource = formateados;
@@ -82,7 +90,7 @@ namespace MetodosNumericos.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message,"Error");
+                MessageBox.Show("Error: " + ex.Message, "Error");
             }
 
         }
@@ -91,10 +99,12 @@ namespace MetodosNumericos.UI
         {
             txtFuncion.Clear();
             txtXi.Clear();
-            txtXf.Clear();
+            if (cbxMetodo.SelectedIndex != 2) //Si el metodo no es Newton-Raphson, reiniciar Xf
+                txtXf.Clear();
             txtError.Clear();
             txtRaiz.Clear();
             lblIteraciones.Content = "";
+            dgTabla.ItemsSource = null;
 
         }
 
@@ -105,7 +115,23 @@ namespace MetodosNumericos.UI
             string abs = "abs(x) para valor absoluto\n";
             string exp = "x^2 para raices\n";
             string multis = "x*3 o 3x o x*sqrt(...) para multiplicacion\n";
-            MessageBox.Show("Lineamientos:\n" +general + sqrt + abs + exp + multis,"Ayuda");
+            MessageBox.Show("Lineamientos:\n" + general + sqrt + abs + exp + multis, "Ayuda");
+        }
+
+        private void cbxMetodo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Si el metodo es Newton-Raphson, deshabilitar el campo de Xf
+            if (cbxMetodo.SelectedIndex == 2)
+            {
+                txtXf.IsEnabled = false;
+                txtXf.Text = "0";
+            }
+            else
+            {
+                txtXf.IsEnabled = true;
+
+            }
+
         }
     }
 }

@@ -229,22 +229,183 @@ namespace MetodosNumericos.Core
             {
                 throw new Exception("Error al evaluar la funcion: " + ex.Message);
             }
-
-
-
-
         }
+
+        /// <summary>
+        /// Metodo que implementa el metodo de Newton Raphson para encontrar raices, entrega una lista con los resultados de cada iteracion
+        /// </summary>
+        /// <param name="funcion"></param>
+        /// <param name="xi"></param>
+        /// <param name="eamax"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<ResultadoIteracion> NewtonRaphson(string funcion, double xi, double eamax)
+        {
+            try
+            {
+                if (funcion is null || funcion.Equals(""))
+                {
+                    throw new ArgumentException("La funcion no puede estar vacia");
+
+                }
+                if (eamax.Equals(0))
+                {
+                    throw new ArgumentException("El error maximo permitido debe de ser mayor que 0");
+                }
+                var funciones = new Funciones();
+                var derivadas = new Derivadas();
+
+                var resultados = new List<ResultadoIteracion>();
+                var xr = 0.0;
+                var ea = 100.0;
+                Iteraciones = 0;
+                while (ea > eamax)
+                {
+                    double xrOld = xr;
+                    var fXi = funciones.ConvertirAFunc(funcion);
+                    var fXiDerivada = derivadas.Derivar(fXi, xi);
+
+                    if (fXiDerivada == 0)
+                    {
+                        throw new ArgumentException("La derivada es cero, no se puede continuar con el metodo.");
+                    }
+                    xr = xi - (fXi(xi) / fXiDerivada);
+                    Iteraciones++;
+
+                    var fXr = funciones.ConvertirAFunc(funcion)(xr);
+                    resultados.Add(new ResultadoIteracion
+                    {
+                        Iteracion = Iteraciones,
+                        Xi = xi,
+                        Xr = xr,
+                        Fxi = fXi(xi),
+                        Fxr = fXr,
+                        Ea = ea
+                    });
+
+                    if (Math.Abs(fXr) < eamax)
+                    {
+                        ea = eamax;
+                        //resultados.Last().Ea = ea;
+                        break;
+                    }
+
+                    if (xr != 0)
+                    {
+                        ea = Math.Abs((xr - xrOld) / xr) * 100;
+                    }
+
+                    xi = xr;
+
+                }
+                return (resultados);
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (NCalc.Exceptions.NCalcParserException)
+            {
+                throw new Exception("Error al convertir la funcion, asegurese de haberla escrito bien");
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception("Error al evaluar la funcion: " + ex.Message);
+            }
+        }
+
+        public List<ResultadoIteracion> Secante(string funcion, double xi, double xf, double eamax)
+        {
+            try
+            {
+                if (funcion is null || funcion.Equals(""))
+                {
+                    throw new ArgumentException("La funcion no puede estar vacia");
+
+                }
+                if (eamax.Equals(0))
+                {
+                    throw new ArgumentException("El error maximo permitido debe de ser mayor que 0");
+                }
+                var resultados = new List<ResultadoIteracion>();
+                double xr = 0;
+                double ea = 100;
+                Iteraciones = 0;
+
+                var fXi = EvaluarFuncion.Evaluar(funcion, xi);
+                var fXi1 = EvaluarFuncion.Evaluar(funcion, xf);
+
+                if (fXi * fXi1 >= 0)
+                {
+                    throw new ArgumentException("La funcion no tiene raices en el intervalo dado.");
+                }
+
+                while (ea > eamax)
+                {
+                    double xrOld = xr;
+                    xr = xf - (fXi1 * (xi - xf)) / (fXi - fXi1);
+                    Iteraciones++;
+
+                    var fXr = EvaluarFuncion.Evaluar(funcion, xr);
+                    fXi = EvaluarFuncion.Evaluar(funcion, xi);
+                    fXi1 = EvaluarFuncion.Evaluar(funcion, xf);
+                    resultados.Add(new ResultadoIteracion
+                    {
+                        Iteracion = Iteraciones,
+                        Xi = xi,
+                        Xf = xf,
+                        Xr = xr,
+                        Fxi = fXi,
+                        Fxf = fXi1,
+                        Fxr = fXr,
+                        Ea = ea,
+                        FxiFxr = fXi * fXr
+                    });
+
+                    if (Math.Abs(fXr) < eamax)
+                    {
+                        ea = eamax;
+                        //resultados.Last().Ea = ea;
+                        break;
+                    }
+
+                    if (xr != 0)
+                    {
+                        ea = Math.Abs((xr - xrOld) / xr) * 100;
+                    }
+
+                    xi = xf;
+                    fXi = EvaluarFuncion.Evaluar(funcion, xi);
+                    xf = xr;
+                    fXi1 = EvaluarFuncion.Evaluar(funcion, xf);
+                }
+
+                return resultados;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (NCalc.Exceptions.NCalcParserException ex)
+            {
+                throw new Exception("Error al convertir la funcion, asegurese de haberla escrito bien");
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception("Error al evaluar la funcion: " + ex.Message);
+            }
+        }
+
+
 
         /// <summary>
         /// Metodo que formatea los resultados a 4 decimales.
         /// </summary>
         /// <param name="resultados"></param>
         /// <returns></returns>
-        
-        public List<ResultadoIteracion> NewtonRaphson(string funcion, double xi, double eamax)
-        {
-            throw new NotImplementedException();
-        }
         public List<ResultadoIteracion> FormatearResultados(List<ResultadoIteracion> resultados)
         {
             return resultados.Select(r => new ResultadoIteracion

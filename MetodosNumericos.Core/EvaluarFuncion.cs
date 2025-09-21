@@ -52,6 +52,15 @@ namespace MetodosNumericos.Core
             return funcion;
         }
 
+        public static string NormalizarFuncion(string funcion)
+        {
+            funcion = InsertarMultiplicacion(funcion);
+            funcion = ConvertirPotencias(funcion);
+            funcion = NormalizarFunciones(funcion);
+            funcion = ConvertirAbs(funcion);
+            return funcion;
+        }
+
         public static double Evaluar(string funcion, double x)
         {
             funcion = InsertarMultiplicacion(funcion);
