@@ -1,5 +1,6 @@
 ﻿using MetodosNumericos.Core;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,18 +19,17 @@ using static MetodosNumericos.Core.RaicesFuncion;
 namespace MetodosNumericos.UI
 {
     /// <summary>
-    /// Lógica de interacción para Raices.xaml
+    /// Lógica de interacción para ComparativaRaices.xaml
     /// </summary>
-    public partial class Raices : UserControl
+    public partial class ComparativaRaices : UserControl
     {
-        public Raices()
+        public ComparativaRaices()
         {
             InitializeComponent();
         }
 
         private void btnCalcular_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 if (!double.TryParse(txtXi.Text, out double xi))
@@ -54,58 +54,36 @@ namespace MetodosNumericos.UI
                     MessageBox.Show("Ingrese una funcion valida.", "Error");
                     return;
                 }
+
                 var raices = new RaicesFuncion();
-                var opcion = cbxMetodo.SelectedIndex;
-                List<ResultadoIteracion> resultadosPorIteracion = [];
+                var resultadosBiseccion = raices.FormatearResultados(raices.Biseccion(txtFuncion.Text, xi, xf, error)).Last();
+                var resultadosRetglaFalsa = raices.FormatearResultados(raices.ReglaFalsa(txtFuncion.Text, xi, xf, error)).Last();
+                var resultadosSecante = raices.FormatearResultados(raices.Secante(txtFuncion.Text, xi, xf, error)).Last();
+                var resultadosNewtonRaphson = raices.FormatearResultados(raices.NewtonRaphson(txtFuncion.Text, xi, error)).Last();
 
-                if (opcion == 0)
+                var modeloDatos = new object[]
                 {
-                    resultadosPorIteracion = raices.Biseccion(txtFuncion.Text, xi, xf, error);
-                }
-                else if (opcion == 1)
-                {
-                    resultadosPorIteracion = raices.ReglaFalsa(txtFuncion.Text, xi, xf, error);
-                }
-                else if (opcion == 2)
-                {
-                    resultadosPorIteracion = raices.NewtonRaphson(txtFuncion.Text, xi, error);
-                }
-                else if (opcion == 3)
-                {
-                    resultadosPorIteracion = raices.Secante(txtFuncion.Text, xi, xf, error);
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione un metodo.", "Error");
-                    return;
-                }
-                if (resultadosPorIteracion.Last().Ea > error)
-                {
-                    MessageBox.Show("Se encontro la raiz. Pero no se llego al criterio de error maximo permitido.", "Atencion");
-                }
-                var formateados = raices.FormatearResultados(resultadosPorIteracion);
-                dgTabla.ItemsSource = formateados;
-                txtRaiz.Text = resultadosPorIteracion.Last().Xr.ToString("G6");
+                    new { Metodo = "Biseccion", Iteraciones=resultadosBiseccion.Iteracion, resultadosBiseccion.Xr, resultadosBiseccion.Fxr, resultadosBiseccion.Ea},
+                    new { Metodo = "Regla Falsa", Iteraciones=resultadosRetglaFalsa.Iteracion, resultadosRetglaFalsa.Xr, resultadosRetglaFalsa.Fxr, resultadosRetglaFalsa.Ea},
+                    new { Metodo = "Secante", Iteraciones=resultadosSecante.Iteracion, resultadosSecante.Xr, resultadosSecante.Fxr, resultadosSecante.Ea},
+                    new { Metodo = "Newton Raphson", Iteraciones=resultadosNewtonRaphson.Iteracion, resultadosNewtonRaphson.Xr, resultadosNewtonRaphson.Fxr, resultadosNewtonRaphson.Ea}
 
+                };
+                dgTabla.ItemsSource = modeloDatos;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error");
+                MessageBox.Show(ex.Message, "Error");
             }
-
         }
 
         private void btnReiniciar_Click(object sender, RoutedEventArgs e)
         {
             txtFuncion.Clear();
             txtXi.Clear();
-            if (cbxMetodo.SelectedIndex != 2) //Si el metodo no es Newton-Raphson, reiniciar Xf
-                txtXf.Clear();
+            txtXf.Clear();
             txtError.Clear();
-            txtRaiz.Clear();
-            lblIteraciones.Content = "";
             dgTabla.ItemsSource = null;
-
         }
 
         private void btnAyuda_Click(object sender, RoutedEventArgs e)
@@ -116,22 +94,6 @@ namespace MetodosNumericos.UI
             string exp = "x^2 para raices\n";
             string multis = "x*3 o 3x o x*sqrt(...) para multiplicacion\n";
             MessageBox.Show("Lineamientos:\n" + general + sqrt + abs + exp + multis, "Ayuda");
-        }
-
-        private void cbxMetodo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Si el metodo es Newton-Raphson, deshabilitar el campo de Xf
-            if (cbxMetodo.SelectedIndex == 2)
-            {
-                txtXf.IsEnabled = false;
-                txtXf.Text = "0";
-            }
-            else
-            {
-                txtXf.IsEnabled = true;
-
-            }
-
         }
     }
 }

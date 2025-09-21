@@ -91,7 +91,7 @@ namespace MetodosNumericos.Core
                     if (Math.Abs(fXr) < eamax)
                     {
                         ea = eamax;
-                        //resultados.Last().Ea = ea;
+                        resultados.Last().Ea = ea;
                         break;
                     }
 
@@ -191,7 +191,7 @@ namespace MetodosNumericos.Core
                     if (Math.Abs(fXr) < eamax)
                     {
                         ea = eamax;
-                        //resultados.Last().Ea = ea;
+                        resultados.Last().Ea = ea;
                         break;
                     }
 
@@ -286,7 +286,7 @@ namespace MetodosNumericos.Core
                     if (Math.Abs(fXr) < eamax)
                     {
                         ea = eamax;
-                        //resultados.Last().Ea = ea;
+                        resultados.Last().Ea = ea;
                         break;
                     }
 
@@ -376,7 +376,7 @@ namespace MetodosNumericos.Core
                     if (Math.Abs(fXr) < eamax)
                     {
                         ea = eamax;
-                        //resultados.Last().Ea = ea;
+                        resultados.Last().Ea = ea;
                         break;
                     }
 

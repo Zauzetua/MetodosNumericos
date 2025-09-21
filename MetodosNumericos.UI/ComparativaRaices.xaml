@@ -1,0 +1,51 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MetodosNumericos.UI"
+             xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="MetodosNumericos.UI.ComparativaRaices"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="439*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
+        <Rectangle HorizontalAlignment="Left" Height="154" Margin="17,211,0,0" Stroke="Black" VerticalAlignment="Top" Width="214"/>
+
+        <Label Content="Comparativa de metodos para encontrar raices" HorizontalAlignment="Center" Margin="0,3,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="24" FontWeight="Bold"/>
+        <DataGrid x:Name="dgTabla" 
+            Margin="247,166,44,29"
+            AutoGenerateColumns="False"
+            HeadersVisibility="Column"
+            CanUserAddRows="False"
+            IsReadOnly="True" FontFamily="Arial">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Metodo" Width="*" Binding="{Binding Metodo}"/>
+                <DataGridTextColumn Header="Iteraciones" Width="*" Binding="{Binding Iteraciones}"/>
+                <DataGridTextColumn Header="Raiz" Width="*" Binding="{Binding Xr}"/>
+                <DataGridTextColumn Header="Y(Raiz)" Width="*" Binding="{Binding Fxr}"/>
+                <DataGridTextColumn Header="Error aprox" Width="*" Binding="{Binding Ea}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="txtXi" Width="120" VerticalContentAlignment="Center" TextWrapping="Wrap" HorizontalContentAlignment="Center" Height="22" HorizontalAlignment="Left" FontFamily="Arial" VerticalAlignment="Top" Margin="120,58,0,0"/>
+        <Label Width="88" Height="28" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" FontFamily="Arial" Content="Ingrese Xi:" VerticalAlignment="Top" Margin="32,55,0,0"/>
+        <TextBox x:Name="txtXf" Width="119" VerticalContentAlignment="Center" TextWrapping="Wrap" HorizontalContentAlignment="Center" Height="22" HorizontalAlignment="Left" FontFamily="Arial" VerticalAlignment="Top" Margin="470,58,0,0"/>
+        <Label Width="91" Height="28" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" FontFamily="Arial" Content="Ingrese Xf:" VerticalAlignment="Top" Margin="379,55,0,0"/>
+        <Grid HorizontalAlignment="Left" Height="26" Margin="32,109,0,0" VerticalAlignment="Top" Width="294">
+            <TextBox x:Name="txtFuncion" Width="118" VerticalAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" Margin="176,0,0,0" HorizontalContentAlignment="Center" Height="22" HorizontalAlignment="Left" FontFamily="Arial"/>
+            <Label Width="132" VerticalAlignment="Center" Height="26" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" FontFamily="Arial" Content="Ingrese la funcion:"/>
+            <Label Width="39" VerticalAlignment="Center" Margin="137,0,0,0" Height="25" HorizontalAlignment="Left" Content="f(x) ="/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="36" Margin="379,109,0,0" VerticalAlignment="Top" Width="279">
+            <TextBox x:Name="txtError" Width="118" VerticalAlignment="Top" VerticalContentAlignment="Center" TextWrapping="Wrap" Margin="161,3,0,0" HorizontalContentAlignment="Center" Height="22" HorizontalAlignment="Left" FontFamily="Arial"/>
+            <Label Width="156" VerticalAlignment="Center" RenderTransformOrigin="0.523,0.293" Height="36" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" FontFamily="Arial" Content="Ingrese el e. maximo:"/>
+        </Grid>
+        <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="68,237,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" Click="btnCalcular_Click"/>
+        <Button x:Name="btnReiniciar" Content="Reiniciar" HorizontalAlignment="Left" Margin="68,303,0,0" VerticalAlignment="Top" Height="42" Width="112" FontFamily="Arial" FontSize="22" Background="#FF0061FF" Foreground="White" RenderTransformOrigin="0.968,0.574" Click="btnReiniciar_Click"/>
+        <Button x:Name="btnAyuda" Content="?" HorizontalAlignment="Left" Margin="107,160,0,0" VerticalAlignment="Top" Background="#FF4D6FF9" Foreground="White" Height="30" Width="34" FontFamily="Arial" FontSize="20" Click="btnAyuda_Click"/>
+
+    </Grid>
+</UserControl>

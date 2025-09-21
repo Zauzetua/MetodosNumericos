@@ -6,19 +6,22 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top" FontFamily="Arial" FontSize="18">
-            <MenuItem Header="Vistas">
+            <MenuItem Header="Varios">
                 <MenuItem Header="Tabulacion" Click="MenuItem_Tabulacion_Click"/>
                 <MenuItem Header="Errores" Click="MenuItem_Errores_Click"/>
+            </MenuItem>
+            <MenuItem Header="Raices">
                 <MenuItem Header="Raices" Click="MenuItem_Raices_Click"/>
+                <MenuItem Header="Comparativa" Click="MenuItem_Comparativa_Raices_Click"/>
             </MenuItem>
         </Menu>
 
         <Grid x:Name="MainContent" Height="418" Width="803">
-            <Button x:Name="btnTabular" Content="Tabulacion de funciones" Width="210" Height="56" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.48,2.349" FontFamily="Arial" FontSize="18" Foreground="White" Background="#FF0033FF" Click="btnTabular_Click" Margin="0,153,0,0"/>
-            <Label Content="¡Bienvenido!" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="36" RenderTransformOrigin="0.32,0.488"/>
-            <Label Content="Por favor, selecciona una opcion" HorizontalAlignment="Center" Margin="0,109,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18"/>
-            <Button x:Name="btnErrores" Content="Calcular errores" Width="210" Height="57" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,236,0,0" RenderTransformOrigin="0.48,2.349" FontFamily="Arial" FontSize="18" Foreground="White" Background="#FF0033FF" Click="btnErrores_Click"/>
-            <Button x:Name="btnRaices" Content="Raices de funcion" HorizontalAlignment="Center" Margin="0,322,0,0" VerticalAlignment="Top" Height="57" Width="210" Foreground="White" Background="#FF0033FF" FontFamily="Arial" FontSize="18" Click="btnRaices_Click"/>
+            <!--<Button x:Name="btnTabular" Content="Tabulacion de funciones" Width="210" Height="56" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.48,2.349" FontFamily="Arial" FontSize="18" Foreground="White" Background="#FF0033FF" Click="btnTabular_Click" Margin="0,153,0,0"/>-->
+            <Label Content="¡Bienvenido!" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="36" RenderTransformOrigin="0.32,0.488" FontWeight="Bold"/>
+            <Label Content="Por favor, selecciona una opción&#xD;&#xA;en el menú superior." HorizontalAlignment="Left" Margin="185,209,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="24" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="460"/>
+            <!--<Button x:Name="btnErrores" Content="Calcular errores" Width="210" Height="57" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,236,0,0" RenderTransformOrigin="0.48,2.349" FontFamily="Arial" FontSize="18" Foreground="White" Background="#FF0033FF" Click="btnErrores_Click"/>-->
+            <!--<Button x:Name="btnRaices" Content="Raices de funcion" HorizontalAlignment="Center" Margin="0,322,0,0" VerticalAlignment="Top" Height="57" Width="210" Foreground="White" Background="#FF0033FF" FontFamily="Arial" FontSize="18" Click="btnRaices_Click"/>-->
         </Grid>
     </DockPanel>
 </Window>
