@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MetodosNumericos.Core
+﻿namespace MetodosNumericos.Core
 {
     public class RaicesFuncion
     {
@@ -259,8 +253,12 @@ namespace MetodosNumericos.Core
                 var xr = 0.0;
                 var ea = 100.0;
                 Iteraciones = 0;
-                while (ea > eamax)
+                int maxIteraciones = 1000; // Limite para evitar bucles infinitos
+                while (ea > eamax && Iteraciones < maxIteraciones)
                 {
+                    if (Math.Abs(xi) > 1e6)
+                        throw new Exception("El metodo diverge (xi demasiado grande).");
+
                     double xrOld = xr;
                     var fXi = funciones.ConvertirAFunc(funcion);
                     var fXiDerivada = derivadas.Derivar(fXi, xi);
@@ -297,6 +295,10 @@ namespace MetodosNumericos.Core
 
                     xi = xr;
 
+                }
+                if (Iteraciones >= maxIteraciones)
+                {
+                    throw new Exception("Se alcanzo el numero maximo de iteraciones sin converger.");
                 }
                 return (resultados);
 
