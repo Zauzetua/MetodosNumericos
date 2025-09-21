@@ -21,7 +21,7 @@
             AutoGenerateColumns="False"
             HeadersVisibility="Column"
             CanUserAddRows="False"
-            IsReadOnly="True" FontFamily="Arial">
+            IsReadOnly="True" FontFamily="Arial" FontSize="14">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Metodo" Width="*" Binding="{Binding Metodo}"/>
                 <DataGridTextColumn Header="Iteraciones" Width="*" Binding="{Binding Iteraciones}"/>

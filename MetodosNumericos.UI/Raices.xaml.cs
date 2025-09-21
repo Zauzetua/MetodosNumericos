@@ -85,7 +85,7 @@ namespace MetodosNumericos.UI
                 }
                 var formateados = raices.FormatearResultados(resultadosPorIteracion);
                 dgTabla.ItemsSource = formateados;
-                txtRaiz.Text = resultadosPorIteracion.Last().Xr.ToString("G6");
+                txtRaiz.Text = resultadosPorIteracion.Last().Xr.ToString("G4");
 
             }
             catch (Exception ex)
