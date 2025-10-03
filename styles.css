@@ -1,0 +1,147 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #D9A0A1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-titulo {
+    display: flex;
+    align-items: center;
+    margin-left: 8vw;
+}
+
+.logo-titulo h1 {
+    font-family: "Mea Culpa", cursive;
+    color: #8C4526;
+    font-size: 90px;
+    font-weight: 400;
+}
+
+.cuenta {
+    display: flex;
+    align-items: center;
+    margin-right: 8vw;
+}
+
+.cuenta h2 {
+    font-family: "Gabriela", serif;
+    color: #8C4526;
+}
+
+.banner {
+    background-image: url("assets/assets/hero.png");
+    background-size: cover;
+    height: 300px;
+    width: 80%;
+    margin: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.banner-search {
+    background-color: white;
+    height: 50px;
+    width: 300px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.banner-search input {
+    display: flex;
+    justify-content: flex-start;
+    border: none;
+    width: 80%;
+    font-family: "Gabriela", serif;
+    font-size: 30px;
+    outline: none;
+    color: #8C4526;
+}
+
+.categorias-titulo,
+.tendencias-titulo {
+    font-family: "Gabriela", serif;
+    background-color: #DD9B7E;
+    align-self: flex-start;
+    display: flex;
+    margin-left: 10vw;
+    padding: 10px;
+    border: 0px;
+    border-radius: 15px;
+    color: white;
+    font-size: 20px;
+    width: 15vw;
+    justify-content: center;
+
+}
+
+.categorias-titulo h2,
+.tendencias-titulo h2 {
+    font-weight: 400;
+}
+
+.categorias-vestidos,
+.tendencias {
+    margin: 20px;
+    display: flex;
+    gap: 10px;
+    width: 80vw;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    justify-content: flex-start;
+}
+
+.categoria,
+.tendencia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+
+
+.categoria-imagen,
+.tendencia-imagen {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    border: 3px solid #DD9B7E;
+}
+
+.categoria p {
+    font-family: "Afacad", sans-serif;
+    color: gray;
+}
+
+.carrito {
+    padding: 15px;
+    border-radius: 50px;
+    background-color: orange;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.carrito img{
+    height: 50px;
+}
