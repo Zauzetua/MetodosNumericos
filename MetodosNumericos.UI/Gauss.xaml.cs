@@ -1,0 +1,187 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+using CoreGauss = MetodosNumericos.Core.Gauss;
+
+namespace MetodosNumericos.UI
+{
+    /// <summary>
+    /// Lógica de interacción para Gauss.xaml
+    /// </summary>
+    public partial class Gauss : UserControl
+    {
+        public Gauss()
+        {
+            InitializeComponent();
+            cbDimension.SelectedIndex = 0; // Seleccion inicial (por defecto 2x2)
+            btnGenerar_Click(this, new RoutedEventArgs());
+        }
+
+        // Evento: genera dinamicamente los cuadros de texto segun la dimension seleccionada
+        private void btnGenerar_Click(object sender, RoutedEventArgs e)
+        {
+            spEntradasMatriz.Children.Clear(); //Reiniciar campos
+            txtMensajes.Clear(); //Limpiar mensajes
+
+            int n = 2; // Dimension por defecto
+            try { n = int.Parse((string)cbDimension.SelectedItem); } catch { n = 2; } // Si no se puede, queda en 2
+
+            // Crear un Grid para las entradas de la matriz A
+            Grid gridA = new() { Margin = new Thickness(0, 0, 0, 6) };
+
+            // Definir columnas y filas
+            for (int c = 0; c < n; c++) gridA.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+            for (int r = 0; r < n; r++) gridA.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+
+            // Crear los cuadros de texto para los coeficientes A[i,j]
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    TextBox txt = new TextBox
+                    {
+                        Width = 60,
+                        Height = 26,
+                        Margin = new Thickness(2),
+                        FontFamily = new System.Windows.Media.FontFamily("Arial"),
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        Name = $"a_{i}_{j}"
+                    };
+                    Grid.SetRow(txt, i);
+                    Grid.SetColumn(txt, j);
+                    gridA.Children.Add(txt);
+                }
+            }
+
+            // Crear los cuadros de texto para el vector b (columna derecha) es decir, los terminos independientes
+            StackPanel spVectorB = new() { Orientation = Orientation.Vertical, Margin = new Thickness(8, 0, 0, 0) };
+            for (int i = 0; i < n; i++)
+            {
+                TextBox txtB = new TextBox()
+                {
+                    Width = 80,
+                    Height = 26,
+                    Margin = new Thickness(2),
+                    FontFamily = new System.Windows.Media.FontFamily("Arial"),
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    Name = $"b_{i}"
+                };
+                spVectorB.Children.Add(txtB);
+            }
+
+            // Contenedor horizontal que une la matriz A y el vector b, asi se ven juntos
+            StackPanel fila = new StackPanel() { Orientation = Orientation.Horizontal };
+            fila.Children.Add(gridA);
+            fila.Children.Add(spVectorB);
+            spEntradasMatriz.Children.Add(fila);
+        }
+
+        // Evento: limpia los campos y resultados, tambien elimina los campos
+        private void btnReiniciar_Click(object sender, RoutedEventArgs e)
+        {
+            spEntradasMatriz.Children.Clear();
+            dgResultados.ItemsSource = null;
+            txtMensajes.Clear();
+        }
+
+        // Evento: calcula la solucion del sistema usando eliminacion gaussiana con pivoteo.
+        private void btnCalcular_Click(object sender, RoutedEventArgs e)
+        {
+            txtMensajes.Clear();
+            try
+            {
+                int n = int.Parse((string)cbDimension.SelectedItem);
+                if (n < 2 || n > 4)
+                {
+                    MessageBox.Show("Dimension invalida, debe estar entre 2 y 4");
+                    txtMensajes.Text = "La dimension debe estar entre 2 y 4";
+                    return;
+                }
+
+                double[,] A = new double[n, n];
+                double[] b = new double[n];
+
+                // Buscar los controles dentro del StackPanel principal
+                var fila = spEntradasMatriz.Children.OfType<StackPanel>().FirstOrDefault();
+                if (fila == null)
+                {
+                    MessageBox.Show("No se encontraron los campos de entrada");
+                    txtMensajes.Text = "No se encontraron los campos de entrada";
+                    return;
+                }
+
+                var gridA = fila.Children.OfType<Grid>().FirstOrDefault();
+                var spB = fila.Children.OfType<StackPanel>().FirstOrDefault(s => s.Children.Count > 0);
+
+                if (gridA == null || spB == null)
+                {
+                    MessageBox.Show("No se encontraron los campos de entrada");
+                    txtMensajes.Text = "No se encontraron los campos de entrada";
+                    return;
+                }
+
+                // Leer la matriz A
+                for (int i = 0; i < n; i++)
+                {
+                    for (int j = 0; j < n; j++)
+                    {
+                        string nombre = $"a_{i}_{j}";
+                        var txt = gridA.Children.OfType<TextBox>().FirstOrDefault(t => t.Name == nombre);
+                        if (txt == null)
+                        {
+                            MessageBox.Show("Falta el campo de matriz: " + nombre);
+                            txtMensajes.Text = "Falta el campo de matriz: " + nombre;
+                            return;
+                        }
+                        if (!double.TryParse(txt.Text, out double valor))
+                        {
+                            MessageBox.Show("Valor invalido en A[" + i + "," + j + "]");
+                            txtMensajes.Text = "Valor invalido en A[" + i + "," + j + "]";
+                            return;
+                        }
+                        A[i, j] = valor;
+                    }
+                }
+
+                // Leer el vector b
+                for (int i = 0; i < n; i++)
+                {
+                    var txt = spB.Children.OfType<TextBox>().ElementAt(i);
+                    if (txt == null)
+                    {
+                        MessageBox.Show("Falta el campo del vector b: " + i);
+                        txtMensajes.Text = "Falta el campo del vector b: " + i;
+                        return;
+                    }
+                    if (!double.TryParse(txt.Text, out double valor))
+                    {
+                        MessageBox.Show("Valor invalido en b[" + i + "]");
+                        txtMensajes.Text = "Valor invalido en b[" + i + "]";
+                        return;
+                    }
+                    b[i] = valor;
+                }
+
+                // Llamar al poderosisimo metodo de COre para resolver
+                double[] x = CoreGauss.Resolver(A, b);
+
+                //redondear a 4 decimales
+                for (int i = 0; i < x.Length; i++)
+                    x[i] = Math.Round(x[i], 4);
+
+                // Mostrar resultados en un DataGrid
+                var lista = new List<object>();
+                for (int i = 0; i < n; i++)
+                    lista.Add(new { Variable = $"x{i + 1}", Valor = x[i] });
+
+                dgResultados.ItemsSource = lista;
+                txtMensajes.Text = "Solucion calculada correctamente.";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                txtMensajes.Text = "Error: " + ex.Message;
+            }
+        }
+    }
+
+}

@@ -39,6 +39,15 @@ namespace MetodosNumericos.UI
             MainContent.Children.Add(view);
         }
 
+        public void MenuItem_Gauss_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Children.Clear();
+            var view = new Gauss();
+            Grid.SetRow(view, 0);
+            Grid.SetColumn(view, 0);
+            MainContent.Children.Add(view);
+        }
+
         private void MenuItem_Comparativa_Raices_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Children.Clear();

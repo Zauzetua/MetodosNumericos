@@ -14,6 +14,9 @@
                 <MenuItem Header="Raices" Click="MenuItem_Raices_Click"/>
                 <MenuItem Header="Comparativa" Click="MenuItem_Comparativa_Raices_Click"/>
             </MenuItem>
+            <MenuItem Header="Sistemas E.">
+                <MenuItem Header="Gauss" Click="MenuItem_Gauss_Click"/>
+            </MenuItem>
         </Menu>
 
         <Grid x:Name="MainContent" Height="418" Width="803">
