@@ -182,6 +182,14 @@ namespace MetodosNumericos.UI
                 txtMensajes.Text = "Error: " + ex.Message;
             }
         }
+
+        private void btnAyuda_Click(object sender, RoutedEventArgs e)
+        {
+            string general = "No use variables, solo ponga los coeficientes (Y su signo) de estas en orden\nUse '.' para decimales\nNo use espacios innecesarios\nNo utilice letras o simbolos.";
+
+            MessageBox.Show("Lineamientos:\n" + general, "Ayuda");
+
+        }
     }
 
 }
