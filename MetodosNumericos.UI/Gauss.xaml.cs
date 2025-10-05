@@ -19,20 +19,43 @@ namespace MetodosNumericos.UI
         // Evento: genera dinamicamente los cuadros de texto segun la dimension seleccionada
         private void btnGenerar_Click(object sender, RoutedEventArgs e)
         {
-            spEntradasMatriz.Children.Clear(); //Reiniciar campos
-            txtMensajes.Clear(); //Limpiar mensajes
+            spEntradasMatriz.Children.Clear(); // Reiniciar campos
+            txtMensajes.Clear(); // Limpiar mensajes
 
             int n = 2; // Dimension por defecto
-            try { n = int.Parse((string)cbDimension.SelectedItem); } catch { n = 2; } // Si no se puede, queda en 2
+            try { n = int.Parse((string)cbDimension.SelectedItem); } catch { n = 2; }
 
             // Crear un Grid para las entradas de la matriz A
             Grid gridA = new() { Margin = new Thickness(0, 0, 0, 6) };
 
-            // Definir columnas y filas
-            for (int c = 0; c < n; c++) gridA.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-            for (int r = 0; r < n; r++) gridA.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+            // Agregar definicion de columnas
+            for (int c = 0; c < n; c++)
+                gridA.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
 
-            // Crear los cuadros de texto para los coeficientes A[i,j]
+            // Agregar una fila extra para los encabezados (x1, x2, ...)
+            gridA.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+
+            // Agregar filas para los cuadros de texto
+            for (int r = 0; r < n; r++)
+                gridA.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+
+            // --- Crear los encabezados de columna (x1, x2, x3, ...) ---
+            for (int j = 0; j < n; j++)
+            {
+                Label lbl = new Label
+                {
+                    Content = $"x{j + 1}",
+                    FontWeight = FontWeights.Bold,
+                    FontSize = 12,
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    Margin = new Thickness(2)
+                };
+                Grid.SetRow(lbl, 0);
+                Grid.SetColumn(lbl, j);
+                gridA.Children.Add(lbl);
+            }
+
+            // --- Crear los cuadros de texto para los coeficientes A[i,j] ---
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
@@ -46,14 +69,32 @@ namespace MetodosNumericos.UI
                         HorizontalContentAlignment = HorizontalAlignment.Center,
                         Name = $"a_{i}_{j}"
                     };
-                    Grid.SetRow(txt, i);
+                    // +1 porque la fila 0 se usa para los encabezados
+                    Grid.SetRow(txt, i + 1);
                     Grid.SetColumn(txt, j);
                     gridA.Children.Add(txt);
                 }
             }
 
-            // Crear los cuadros de texto para el vector b (columna derecha) es decir, los terminos independientes
-            StackPanel spVectorB = new() { Orientation = Orientation.Vertical, Margin = new Thickness(8, 0, 0, 0) };
+            // --- Crear los cuadros de texto para el vector b ---
+            StackPanel spVectorB = new()
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(8, 0, 0, 0)
+            };
+
+            // Encabezado para el vector b
+            Label lblB = new Label
+            {
+                Content = "b",
+                FontWeight = FontWeights.Bold,
+                FontSize = 12,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(2)
+            };
+            spVectorB.Children.Add(lblB);
+
+            // Campos del vector b
             for (int i = 0; i < n; i++)
             {
                 TextBox txtB = new TextBox()
@@ -68,12 +109,13 @@ namespace MetodosNumericos.UI
                 spVectorB.Children.Add(txtB);
             }
 
-            // Contenedor horizontal que une la matriz A y el vector b, asi se ven juntos
+            // --- Contenedor horizontal que une matriz A y vector b ---
             StackPanel fila = new StackPanel() { Orientation = Orientation.Horizontal };
             fila.Children.Add(gridA);
             fila.Children.Add(spVectorB);
             spEntradasMatriz.Children.Add(fila);
         }
+
 
         // Evento: limpia los campos y resultados, tambien elimina los campos
         private void btnReiniciar_Click(object sender, RoutedEventArgs e)
@@ -161,8 +203,19 @@ namespace MetodosNumericos.UI
                     b[i] = valor;
                 }
 
-                // Llamar al poderosisimo metodo de COre para resolver
-                double[] x = CoreGauss.Resolver(A, b);
+                // Seleccionar metodo segun la seleccion del usuario
+                string metodo = (string)cbxMetodo.SelectedItem ?? "Gauss";
+                double[] x;
+                if (metodo.Contains("Jordan") || metodo.Contains("jordan", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    // Gauss-Jordan
+                    x = CoreGauss.ResolverGaussJordan(A, b);
+                }
+                else
+                {
+                    // Gauss 
+                    x = CoreGauss.Resolver(A, b);
+                }
 
                 //redondear a 4 decimales
                 for (int i = 0; i < x.Length; i++)
@@ -175,6 +228,7 @@ namespace MetodosNumericos.UI
 
                 dgResultados.ItemsSource = lista;
                 txtMensajes.Text = "Solucion calculada correctamente.";
+                MostrarMatrizAumentada(A, b);
             }
             catch (Exception ex)
             {
@@ -189,6 +243,21 @@ namespace MetodosNumericos.UI
 
             MessageBox.Show("Lineamientos:\n" + general, "Ayuda");
 
+        }
+
+        private void MostrarMatrizAumentada(double[,] A, double[] b)
+        {
+            int n = A.GetLength(0);
+            string matriz = "Matriz Aumentada [A|b]:\n";
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    matriz += $"{A[i, j],8:F4} ";
+                }
+                matriz += $"| {b[i],8:F4}\n";
+            }
+            MessageBox.Show(matriz, "Matriz Aumentada");
         }
     }
 

@@ -20,7 +20,7 @@
 
         <Button x:Name="btnGenerar" Content="Generar campos" HorizontalAlignment="Left" Margin="220,55,0,0" VerticalAlignment="Top" Height="30" Width="120" FontFamily="Arial" FontSize="14" Background="#FF0061FF" Foreground="White" Click="btnGenerar_Click"/>
 
-        <ScrollViewer HorizontalAlignment="Left" Height="250" Margin="20,100,0,0" VerticalAlignment="Top" Width="360">
+        <ScrollViewer HorizontalAlignment="Left" Height="250" Margin="20,0,0,0" VerticalAlignment="Center" Width="370">
             <StackPanel x:Name="spEntradasMatriz" Orientation="Vertical" />
         </ScrollViewer>
 

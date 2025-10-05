@@ -123,6 +123,54 @@ namespace MetodosNumericos.Core
 
             return x;
         }
+
+        /// <summary>
+        /// Metodo que resuelve un sistema Ax = b usando Gauss-Jordan con pivoteo parcial
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static double[] ResolverGaussJordan(double[,] A, double[] b)
+        {
+            ArgumentNullException.ThrowIfNull(A);
+            ArgumentNullException.ThrowIfNull(b);
+
+            int n = A.GetLength(0);
+            if (A.GetLength(1) != n) throw new ArgumentException("La matriz A debe ser cuadrada");
+            if (b.Length != n) throw new ArgumentException("El vector b debe tener la misma cantidad de filas que A");
+            if (n < 2 || n > 4) throw new ArgumentException("Solo se permiten tamaños de 2x2 hasta 4x4");
+
+            double[,] aug = Matrices.FormarMatriz(A, b);
+            aug = Matrices.ClonarMatriz(aug);
+
+            int cols = n + 1;
+
+            // Gauss-Jordan: llevar a forma reducida por filas
+            for (int k = 0; k < n; k++)
+            {
+                int piv = Matrices.EncontrarFilaPivot(aug, k, k);
+                if (Math.Abs(aug[piv, k]) < 1e-14) throw new ArgumentException("La matriz es singular o casi singular");
+                if (piv != k) Matrices.IntercambiarFilas(aug, piv, k);
+
+                // Normalizar la fila k para que el pivote sea 1
+                double pivVal = aug[k, k];
+                for (int j = k; j < cols; j++) aug[k, j] /= pivVal;
+
+                // Hacer ceros en todas las otras filas en la columna k
+                for (int i = 0; i < n; i++)
+                {
+                    if (i == k) continue;
+                    double factor = aug[i, k];
+                    aug[i, k] = 0.0;
+                    for (int j = k + 1; j < cols; j++) aug[i, j] -= factor * aug[k, j];
+                }
+            }
+
+            // Extraer solucion
+            double[] x = new double[n];
+            for (int i = 0; i < n; i++) x[i] = aug[i, cols - 1];
+            return x;
+        }
     }
 
 }
