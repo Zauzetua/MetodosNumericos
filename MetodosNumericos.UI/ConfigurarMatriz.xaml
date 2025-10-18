@@ -60,7 +60,19 @@
                         Background="#e6e6e6"
                         VerticalAlignment="Stretch"/>
 
-               
+                <Button Grid.Column="3"
+                        Content="?"
+                        Click="BtnAyuda_Click"
+                        Padding="12,6"
+                        Margin="0,0,0,0"
+                        Background="#0061FF"
+                        Foreground="White"
+                        BorderThickness="0"
+                        FontFamily="Arial"
+                        Height="34"
+                        FontSize="15"
+                        FontWeight="SemiBold"
+                        Width="35"/>
 
                 <Button Grid.Column="4"
                         Content="Generar matriz"

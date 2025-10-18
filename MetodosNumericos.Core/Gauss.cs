@@ -241,6 +241,57 @@ namespace MetodosNumericos.Core
             return (iteraciones.ToArray(), errores.ToArray());
         }
 
+        /// <summary>
+        /// Metodo que intenta reordenar las filas de A y b para hacer que A sea diagonalmente dominante
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static bool ReordenarParaGaussSeidel(ref double[,] A, ref double[] b)
+        {
+            int n = A.GetLength(0);
+            bool[] usedRows = new bool[n];
+            double[,] newA = new double[n, n];
+            double[] newB = new double[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                int bestRow = -1;
+                double maxDiagonal = 0;
+
+                for (int j = 0; j < n; j++)
+                {
+                    if (usedRows[j]) continue;
+
+                    double sumOther = 0;
+                    for (int k = 0; k < n; k++)
+                    {
+                        if (k != i) sumOther += Math.Abs(A[j, k]);
+                    }
+
+                    if (Math.Abs(A[j, i]) >= sumOther && Math.Abs(A[j, i]) > maxDiagonal)
+                    {
+                        maxDiagonal = Math.Abs(A[j, i]);
+                        bestRow = j;
+                    }
+                }
+
+                if (bestRow == -1)
+                    return false; //No se pudo, ff
+
+                // Copiar la fila seleccionada
+                for (int k = 0; k < n; k++)
+                    newA[i, k] = A[bestRow, k];
+                newB[i] = b[bestRow];
+                usedRows[bestRow] = true;
+            }
+
+            A = newA;
+            b = newB;
+            return true;
+        }
+
+
 
     }
 

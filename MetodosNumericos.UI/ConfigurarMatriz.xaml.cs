@@ -137,6 +137,12 @@ namespace MetodosNumericos.UI
             DialogResult = true;
             Close();
         }
+
+        private void BtnAyuda_Click(object sender, RoutedEventArgs e)
+        {
+            string general = "No use variables, solo ponga los coeficientes (Y su signo) de estas en orden\nUse '.' para decimales\nNo use espacios innecesarios\nNo utilice letras o simbolos.";
+            MessageBox.Show("Lineamientos:\n" + general, "Ayuda");
+        }
     }
 }
 

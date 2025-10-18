@@ -14,8 +14,9 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="500,347,0,0" VerticalAlignment="Top" Height="40" Width="120" FontFamily="Arial" FontSize="18" Background="#FF0061FF" Foreground="White" Click="btnCalcular_Click"/>
-        <Button x:Name="btnConfigurarMatriz" Content="Configurar Matriz" HorizontalAlignment="Left" Margin="180,347,0,0" VerticalAlignment="Top" Height="40" Width="151" FontFamily="Arial" FontSize="18" Background="#FF0061FF" Foreground="White" Click="btnConfigurar_Click" RenderTransformOrigin="-0.985,0.7"/>
+        <Button x:Name="btnCalcular" Content="Calcular" HorizontalAlignment="Center" Margin="0,321,0,0" VerticalAlignment="Top" Height="40" Width="120" FontFamily="Arial" FontSize="18" Background="#FF0061FF" Foreground="White" Click="btnCalcular_Click"/>
+        <Button x:Name="btnConfigurarMatriz" Content="Configurar Matriz" HorizontalAlignment="Left" Margin="98,321,0,0" VerticalAlignment="Top" Height="40" Width="151" FontFamily="Arial" FontSize="18" Background="#FF0061FF" Foreground="White" Click="btnConfigurar_Click" RenderTransformOrigin="-0.985,0.7"/>
+        <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="546,321,0,0" VerticalAlignment="Top" Height="40" Width="151" FontFamily="Arial" FontSize="18" Background="#FF0061FF" Foreground="White" Click="btnLimpiar_Click" RenderTransformOrigin="-0.985,0.7"/>
 
     </Grid>
 </UserControl>

@@ -60,6 +60,10 @@ namespace MetodosNumericos.UI
 
             try
             {
+                if(!Core.Gauss.ReordenarParaGaussSeidel(ref A, ref b))
+                {
+                    MessageBox.Show("No se pudo reordenar la matriz para el metodo de Gauss-Seidel. Podria no converger");
+                }
                 var (iteraciones, errores) = Core.Gauss.GaussSeidel(A, b, 1e-3, 100);
                 var tablaResultados = CrearTablaResultados(iteraciones, errores);
                 dgResultados.ItemsSource = tablaResultados.DefaultView;
@@ -83,6 +87,11 @@ namespace MetodosNumericos.UI
 
         }
 
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            dgResultados.ItemsSource = null;
+            dgResultados.Items.Clear();
+        }
     }
 
 
