@@ -171,6 +171,77 @@ namespace MetodosNumericos.Core
             for (int i = 0; i < n; i++) x[i] = aug[i, cols - 1];
             return x;
         }
+
+        /// <summary>
+        /// Metodo que resuelve un sistema de ecuaciones lineales Ax = b usando el metodo de Gauss-Seidel
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static (double[][] iteraciones, double[][] errores) GaussSeidel(
+        double[,] A,
+        double[] b,
+        double tol = 1e-6,
+        int maxIter = 1000)
+        {
+            if (A is null) throw new ArgumentNullException(nameof(A));
+            if (b is null) throw new ArgumentNullException(nameof(b));
+
+            int n = A.GetLength(0);
+            if (A.GetLength(1) != n)
+                throw new ArgumentException("La matriz A debe ser cuadrada.", nameof(A));
+            if (b.Length != n)
+                throw new ArgumentException("El vector b debe tener la misma longitud que A.", nameof(b));
+
+            // Validar ceros en la diagonal
+            for (int i = 0; i < n; i++)
+                if (Math.Abs(A[i, i]) < double.Epsilon)
+                    throw new ArgumentException($"El elemento diagonal A[{i},{i}] es cero (no se puede dividir).");
+
+            double[] x = new double[n];
+            double[] xOld = new double[n];
+
+            List<double[]> iteraciones = new();
+            List<double[]> errores = new();
+
+            for (int iter = 0; iter < maxIter; iter++)
+            {
+                Array.Copy(x, xOld, n);
+
+                for (int i = 0; i < n; i++)
+                {
+                    double suma = b[i];
+
+                    // Parte j < i 
+                    for (int j = 0; j < i; j++)
+                        suma -= A[i, j] * x[j];
+
+                    // Parte j > i
+                    for (int j = i + 1; j < n; j++)
+                        suma -= A[i, j] * xOld[j];
+
+                    x[i] = suma / A[i, i];
+                }
+
+                // eror por variabkle
+                double[] errorIter = new double[n];
+                for (int i = 0; i < n; i++)
+                {
+                    errorIter[i] = Math.Abs((x[i] - xOld[i]) / (x[i] == 0 ? 1 : x[i]));
+                }
+                iteraciones.Add((double[])x.Clone());
+                errores.Add(errorIter);
+
+                //errores menores a la tolerancia, ya ganamos
+                if (errorIter.All(e => e < tol))
+                    break;
+            }
+
+            return (iteraciones.ToArray(), errores.ToArray());
+        }
+
+
     }
 
 }

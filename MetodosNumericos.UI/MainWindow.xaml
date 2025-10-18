@@ -16,6 +16,7 @@
             </MenuItem>
             <MenuItem Header="Sistemas E.">
                 <MenuItem Header="Gauss" Click="MenuItem_Gauss_Click"/>
+                <MenuItem Header="Gauss-Seidel" Click="MenuItem_GaussSeidel_Click"/>
             </MenuItem>
         </Menu>
 
