@@ -18,6 +18,9 @@
                 <MenuItem Header="Gauss" Click="MenuItem_Gauss_Click"/>
                 <MenuItem Header="Gauss-Seidel" Click="MenuItem_GaussSeidel_Click"/>
             </MenuItem>
+            <MenuItem Header="Regresion">
+                <MenuItem Header="Regresion Lineal" Click="MenuItem_RegresionLineal_Click"/>
+            </MenuItem>
         </Menu>
 
         <Grid x:Name="MainContent" Height="418" Width="803">

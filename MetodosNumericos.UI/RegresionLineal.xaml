@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="MetodosNumericos.UI.RegresionLineal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MetodosNumericos.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" 
+             Background="White">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="X:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox x:Name="txtX" Width="80" Margin="0,0,10,0"/>
+            <TextBlock Text="Y:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox x:Name="txtY" Width="80" Margin="0,0,10,0"/>
+            <Button x:Name="btnAgregarPunto" Content="Agregar Punto" Click="btnAgregarPunto_Click" Margin="0,0,10,0"/>
+            <Button x:Name="btnCalcular" Content="Calcular Regresión" Click="btnCalcular_Click" Margin="0,0,10,0"/>
+            <Button x:Name="btnLimpiar" Content="Limpiar Todo" Click="btnLimpiar_Click"/>
+            <Button x:Name="btnEjemplo" Content="Ejemplo" Width="48" Margin="10,0,10,0" Click="btnEjemplo_Click"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Puntos Ingresados" Grid.Column="0" Margin="0,0,5,0">
+                <DataGrid x:Name="dgPuntos" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="X" Binding="{Binding X}"/>
+                        <DataGridTextColumn Header="Y" Binding="{Binding Y}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <!-- Tabla de resultados -->
+            <GroupBox Header="Resultados por Iteración" Grid.Column="1" Margin="5,0,0,0">
+                <DataGrid x:Name="dgResultados" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Xi" Binding="{Binding Xi, StringFormat=F6}"/>
+                        <DataGridTextColumn Header="Yi" Binding="{Binding Yi, StringFormat=F6}"/>
+                        <DataGridTextColumn Header="Xi²" Binding="{Binding Xi2, StringFormat=F6}"/>
+                        <DataGridTextColumn Header="Xi·Yi" Binding="{Binding XiYi, StringFormat=F6}"/>
+                        <DataGridTextColumn Header="Yi²" Binding="{Binding Yi2, StringFormat=F6}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Margin="0,10,0,0">
+            <TextBlock x:Name="txtEcuacion" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock x:Name="txtRCuadrado" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
