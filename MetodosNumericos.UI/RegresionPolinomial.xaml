@@ -4,9 +4,81 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MetodosNumericos.UI"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             mc:Ignorable="d"
+             Background="#FAFAFA"
+             Height="460" Width="760">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Padding="10" Margin="0,0,0,10" CornerRadius="5" BorderBrush="#DDD" BorderThickness="1" Background="White">
+            <UniformGrid Columns="10" Rows="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0">
+                <TextBlock Text="X:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="txtX" Width="70" VerticalAlignment="Center"/>
+
+                <TextBlock Text="Y:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+                <TextBox x:Name="txtY" Width="70" VerticalAlignment="Center"/>
+                <Button x:Name="btnAgregarPunto" Content="Agregar" Width="50" Margin="10,0,0,0" Click="btnAgregarPunto_Click"/>
+                <TextBlock Text="Grado:" VerticalAlignment="Center" Width="46"/>
+                <ComboBox x:Name="cmbGrado" Width="60" VerticalAlignment="Center">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                </ComboBox>
+
+                <Button x:Name="btnCalcular" Content="Calcular" Width="60" Margin="10,0,0,0" Click="btnCalcular_Click"/>
+                <Button x:Name="btnLimpiar" Content="Limpiar" Width="60" Margin="10,0,0,0" Click="btnLimpiar_Click"/>
+                <Button x:Name="btnEjemplo" Content="Ejemplo" Width="48" Margin="10,0,10,0" Click="btnEjemplo_Click"/>
+
+            </UniformGrid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="0,0,0,48">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.2*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Puntos Ingresados" Grid.Column="0" Margin="0">
+                <DataGrid x:Name="dgPuntos" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" 
+                          HeadersVisibility="Column" AlternatingRowBackground="#F5F5F5"
+                          CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="X" Binding="{Binding X}" Width="*"/>
+                        <DataGridTextColumn Header="Y" Binding="{Binding Y}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <GroupBox Header="Resultados de la Regresión" Grid.Column="1" Margin="0">
+                <DataGrid x:Name="dgResultados" AutoGenerateColumns="False" IsReadOnly="True" Margin="5"
+                          HeadersVisibility="Column" AlternatingRowBackground="#F5F5F5"
+                          CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="X" Binding="{Binding X}" Width="*"/>
+                        <DataGridTextColumn Header="Y" Binding="{Binding Y}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+
+
+        <Border Grid.Row="1" Margin="0,295,0,38" Padding="10"
+                BorderBrush="#DDD" BorderThickness="1" CornerRadius="5"
+                Background="White" Grid.RowSpan="2">
+            <TextBlock x:Name="txtEcuacion" 
+                       TextWrapping="Wrap" 
+                       FontWeight="Bold"
+                       FontSize="16"
+                       Foreground="#333"
+                       TextAlignment="Center" Margin="-11,-7,11,6"/>
+        </Border>
+
     </Grid>
 </UserControl>

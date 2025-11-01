@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MetodosNumericos.Core
+﻿namespace MetodosNumericos.Core
 {
 
     public enum TipoRegresion
@@ -244,11 +238,11 @@ namespace MetodosNumericos.Core
     public class RegresionPolinomial
     {
         /// <summary>
-        /// Calcula los coeficientes de la regresión polinomial
+        /// Calcula los coeficientes de la regresion polinomial
         /// </summary>
         /// <param name="puntos">Lista de puntos XY</param>
-        /// <param name="grado">Grado del polinomio (1 para lineal, 2 para cuadrática, etc.)</param>
-        /// <returns>Coeficientes del polinomio y resultados por iteración</returns>
+        /// <param name="grado">Grado del polinomio</param>
+        /// <returns>Coeficientes y resultados  </returns>
         public static (double[] coeficientes, List<ResultadosPolinomiales> resultados) CalcularRegresionPolinomial(List<PuntoXY> puntos, int grado)
         {
             if (puntos == null || puntos.Count < grado + 1)
@@ -259,7 +253,7 @@ namespace MetodosNumericos.Core
             int n = puntos.Count;
             var resultados = new List<ResultadosPolinomiales>();
 
-            // Crear la matriz de coeficientes y el vector de terminos independientes
+            // Crear la matriz de coeficientes y el vector de terminos independientes (matriz ps)
             double[,] matrizA = new double[grado + 1, grado + 1];
             double[] vectorB = new double[grado + 1];
 
@@ -306,7 +300,7 @@ namespace MetodosNumericos.Core
         }
 
         /// <summary>
-        /// Obtiene la ecuación del polinomio en formato legible
+        /// Obtiene la ecuacion del polinomio en formato legible
         /// </summary>
         public static string ObtenerEcuacion(double[] coeficientes)
         {
@@ -316,7 +310,7 @@ namespace MetodosNumericos.Core
             {
                 if (Math.Abs(coeficientes[i]) < 1e-10) continue;
 
-                string termino = $"{coeficientes[i]:F4}";
+                string termino = $"{coeficientes[i]:F4}"; //6 ya son muchos
                 if (i > 0)
                 {
                     termino += $"x";
@@ -339,7 +333,7 @@ namespace MetodosNumericos.Core
     {
         public double X { get; set; }
         public double Y { get; set; }
-        public required double[] PotenciasX { get; set; }  // Almacena X^1, X^2, ... X^(2n)
+        public required double[] PotenciasX { get; set; }  // Almacena X^1, X^2...
         public required double[] XY { get; set; }          // Almacena X^i*Y para cada grado
     }
 }

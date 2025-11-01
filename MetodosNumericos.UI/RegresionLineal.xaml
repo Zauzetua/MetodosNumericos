@@ -40,7 +40,7 @@
                 </DataGrid>
             </GroupBox>
 
-            <!-- Tabla de resultados -->
+            
             <GroupBox Header="Resultados por Iteración" Grid.Column="1" Margin="5,0,0,0">
                 <DataGrid x:Name="dgResultados" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
                     <DataGrid.Columns>
