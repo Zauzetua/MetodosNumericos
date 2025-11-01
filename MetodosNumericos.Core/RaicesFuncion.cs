@@ -116,7 +116,7 @@
             {
                 throw;
             }
-            catch (NCalc.Exceptions.NCalcParserException ex)
+            catch (NCalc.Exceptions.NCalcParserException)
             {
                 throw new Exception("Error al convertir la funcion, asegurese de haberla escrito bien");
             }
@@ -217,7 +217,7 @@
             {
                 throw;
             }
-            catch (NCalc.Exceptions.NCalcParserException ex)
+            catch (NCalc.Exceptions.NCalcParserException)
             {
                 throw new Exception("Error al convertir la funcion, asegurese de haberla escrito bien");
             }
@@ -402,7 +402,7 @@
             {
                 throw;
             }
-            catch (NCalc.Exceptions.NCalcParserException ex)
+            catch (NCalc.Exceptions.NCalcParserException)
             {
                 throw new Exception("Error al convertir la funcion, asegurese de haberla escrito bien");
             }

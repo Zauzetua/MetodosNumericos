@@ -21,6 +21,7 @@
             <MenuItem Header="Regresion">
                 <MenuItem Header="Regresion Lineal" Click="MenuItem_RegresionLineal_Click"/>
                 <MenuItem Header="Regresion Polinomial" Click="MenuItem_RegresionPolinomial_Click"/>
+                <MenuItem Header="Regresion L. Multiple" Click="MenuItem_LinealMultiple_Click"/>
             </MenuItem>
         </Menu>
 

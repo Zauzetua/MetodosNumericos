@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MetodosNumericos.Tests
 {
+    /// <summary>
+    /// Clase de pruebas para regresion
+    /// </summary>
     public class RegresionTests
     {
         /// <summary>
@@ -69,8 +72,9 @@ namespace MetodosNumericos.Tests
             Assert.Throws<InvalidOperationException>(() => Regresion.RegresionLineal(sumas), "Deberia lanzar una excepcion por denominador cero");
         }
 
-        //Polinomiales
-
+        /// <summary>
+        /// Metodo que prueba la regresion polinomial de grado 2
+        /// </summary>
         [Test]
         public void TestCalcularRegresionPolinomial_Grado2()
         {
@@ -97,7 +101,9 @@ namespace MetodosNumericos.Tests
             });
         }
 
-        //prueba de grado insuficiente
+        /// <summary>
+        /// Prueba de regresion polinomial con puntos insuficientes
+        /// </summary>
         [Test]
         public void TestCalcularRegresionPolinomial_InsufficientPoints()
         {
@@ -109,6 +115,56 @@ namespace MetodosNumericos.Tests
                 };
             // Act & Assert
             Assert.Throws<ArgumentException>(() => RegresionPolinomial.CalcularRegresionPolinomial(puntos, 2), "Deberia lanzar una excepcion por puntos insuficientes para el grado");
+        }
+
+        /// <summary>
+        /// Prueba de regresion lineal multiple, me agarre un ejemplo de youtube
+        /// </summary>
+        [Test]
+        public void TestCalcularRegresionLinealMultiple()
+        {
+            // Arrange
+            var datos = new List<PuntoMultiple>
+            {
+                new([2.6, 27], 40), //1
+                new([4, 21], 24), //2
+                new([3.4, 15], 20), //3
+                new([3, 42], 48), //4
+                new([3.2, 45], 40), //5
+                new([2.4, 36], 60), //6
+                new([3.20, 18], 20), //7
+                new([2.80, 30], 48), //8
+                new([2.00, 45], 68),
+                new([2.2, 63], 80),
+
+            };
+            // Act
+            var resultado= RegresionLinealMultiple.CalcularRegresion(datos);
+            var ecuacion = resultado.ObtenerEcuacion();
+
+            Assert.Multiple(() =>
+            {
+                // Assert
+                Assert.That(resultado.B0, Is.EqualTo(65.6).Within(0.1), "Coeficiente B0 incorrecto");
+                Assert.That(resultado.Coeficientes[0], Is.EqualTo(-16.4).Within(0.1), "Coeficiente B1 incorrecto");
+                Assert.That(resultado.Coeficientes[1], Is.EqualTo(0.78).Within(0.1), "Coeficiente B2 incorrecto");
+
+            });
+        }
+
+        /// <summary>
+        /// prueba de regresion lineal multiple con puntos insuficientes
+        /// </summary>
+        [Test]
+        public void TestCalcularRegresionLinealMultiple_InsufficientPoints()
+        {
+            // Arrange
+            var datos = new List<PuntoMultiple>
+            {
+                new([2.6, 27], 40), //1
+            };
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => RegresionLinealMultiple.CalcularRegresion(datos), "Deberia lanzar una excepcion por puntos insuficientes");
         }
 
     }

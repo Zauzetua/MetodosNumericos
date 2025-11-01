@@ -336,4 +336,133 @@
         public required double[] PotenciasX { get; set; }  // Almacena X^1, X^2...
         public required double[] XY { get; set; }          // Almacena X^i*Y para cada grado
     }
+
+    /// <summary>
+    /// Representa un punto en el espacio multidimensional
+    /// </summary>
+    public class PuntoMultiple
+    {
+        /// <summary>
+        /// Variables independientes
+        /// </summary>
+        public double[] X { get; set; }
+
+        /// <summary>
+        /// Variable dependiente (Y)
+        /// </summary>
+        public double Y { get; set; }
+
+        public PuntoMultiple(double[] x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+    }
+
+    /// <summary>
+    /// Contiene los resultados de un calculo de regresion lineal multiple
+    /// </summary>
+    public class ResultadoRegresionMultiple
+    {
+        /// <summary>
+        /// Termino independiente 
+        /// </summary>
+        public double B0 { get; set; }
+
+        /// <summary>
+        /// Coeficientes de las variables independientes
+        /// </summary>
+        public required double[] Coeficientes { get; set; }
+
+        /// <summary>
+        /// Obtiene la ecuacion de regresion en formato legible
+        /// </summary>
+        public string ObtenerEcuacion()
+        {
+            var terminos = new List<string>
+            {
+                $"{B0:F4}"
+            };
+
+            for (int i = 0; i < Coeficientes.Length; i++)
+            {
+                if (Math.Abs(Coeficientes[i]) < 1e-10) continue;
+                terminos.Add($"{Coeficientes[i]:F4}X{i + 1}");
+            }
+
+            return $"Y = {string.Join(" + ", terminos)}";
+        }
+    }
+
+    /// <summary>
+    /// Clase que maneja la regresion lineal multiple
+    /// </summary>
+    public class RegresionLinealMultiple
+    {
+        /// <summary>
+        /// Calcula los coeficientes de la regresion lineal multiple usando el metodo de minimos cuadrados
+        /// </summary>
+        /// <param name="puntos">Lista de puntos multidimensionales</param>
+        /// <returns>Resultado con los coeficientes</returns>
+        public static ResultadoRegresionMultiple CalcularRegresion(List<PuntoMultiple> puntos)
+        {
+            if (puntos == null || !puntos.Any())
+                throw new ArgumentException("La lista de puntos no puede estar vacia");
+
+            int n = puntos.Count; // Numero de observaciones
+            int k = puntos[0].X.Length; // Numero de variables independientes
+
+            if (n < k + 1)
+                throw new ArgumentException($"Se necesitan al menos {k + 1} observaciones para {k} variables independientes");
+
+            // Crear la matriz X (incluyendo columna de 1s para β₀)
+            double[,] matrizX = new double[n, k + 1];
+            double[] vectorY = new double[n];
+
+            // Llenar la matriz X y el vector Y
+            for (int i = 0; i < n; i++)
+            {
+                matrizX[i, 0] = 1; // Termino constante
+                for (int j = 0; j < k; j++)
+                {
+                    matrizX[i, j + 1] = puntos[i].X[j];
+                }
+                vectorY[i] = puntos[i].Y;
+            }
+
+            // Calcular X'X
+            double[,] xtx = new double[k + 1, k + 1];
+            for (int i = 0; i <= k; i++)
+                for (int j = 0; j <= k; j++)
+                    for (int m = 0; m < n; m++)
+                        xtx[i, j] += matrizX[m, i] * matrizX[m, j];
+
+            // Calcular X'Y
+            double[] xty = new double[k + 1];
+            for (int i = 0; i <= k; i++)
+                for (int m = 0; m < n; m++)
+                    xty[i] += matrizX[m, i] * vectorY[m];
+
+            // Resolver el sistema (X'X)β = X'Y usando Gauss
+            var coeficientes = Gauss.Resolver(xtx, xty); //amo reutilizar el metodo de Gauss
+
+            // Calcular valores predichos
+            double ssResidual = 0;
+            for (int i = 0; i < n; i++)
+            {
+                double yPredicho = coeficientes[0]; // a
+                for (int j = 0; j < k; j++)
+                {
+                    yPredicho += coeficientes[j + 1] * puntos[i].X[j];
+                }
+                ssResidual += Math.Pow(vectorY[i] - yPredicho, 2);
+            }
+
+            return new ResultadoRegresionMultiple
+            {
+                B0 = coeficientes[0],
+                Coeficientes = coeficientes.Skip(1).ToArray(),
+            };
+        }
+    }
 }
