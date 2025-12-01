@@ -7,7 +7,61 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <Grid>
-            
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,8,0">
+                <TextBlock Text="Valores X (coma separados):" Margin="0,0,0,4"/>
+                <TextBox Name="txtX" MinWidth="200" MaxWidth="360" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="8,0,0,0">
+                <TextBlock Text="Valores Y (coma separados):" Margin="0,0,0,4"/>
+                <TextBox Name="txtY" MinWidth="200" MaxWidth="360" HorizontalAlignment="Stretch" Margin="0,0,30,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,8,0,0">
+                <TextBlock Text="Xi:" Margin="0,6,8,0" VerticalAlignment="Center"/>
+                <TextBox Name="txtXi" Width="120"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8,0,0">
+                <Button x:Name="btnCalcular"  Content="Calcular" Width="100" Height="30" Click="btnCalcular_Click" Margin="0,0,25,0"/>
+            </StackPanel>
+            <Button x:Name="btnLimpiar" Content="Limpiar" Click="btnLimpiar_Click" Margin="149,8,141,0" Grid.Column="1" Grid.Row="1"/>
+            <Button x:Name="btnEjemplo" Content="Ejemplo" Click="btnEjemplo_Click" Margin="31,8,259,0" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
+
+        <DataGrid Name="dgPoints" Grid.Row="1" AutoGenerateColumns="False" Height="200" Margin="0,0,23,10" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="X" Binding="{Binding X}" Width="*" />
+                <DataGridTextColumn Header="Y" Binding="{Binding Y}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="Grado n:" FontWeight="Bold"/>
+                <TextBlock Name="lblDegree" Margin="8,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <TextBlock Text="Punto interpolado:" FontWeight="Bold"/>
+                <TextBlock Name="lblResult" Margin="8,0,0,0"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

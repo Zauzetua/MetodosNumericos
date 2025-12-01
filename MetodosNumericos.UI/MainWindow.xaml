@@ -23,6 +23,9 @@
                 <MenuItem Header="Regresion Polinomial" Click="MenuItem_RegresionPolinomial_Click"/>
                 <MenuItem Header="Regresion L. Multiple" Click="MenuItem_LinealMultiple_Click"/>
             </MenuItem>
+            
+            <MenuItem Header="Interpolacion" Click="MenuItem_InterpolacionLagrange_CLick">
+            </MenuItem>
         </Menu>
 
         <Grid x:Name="MainContent" Height="418" Width="803">

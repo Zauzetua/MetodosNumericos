@@ -93,6 +93,15 @@ namespace MetodosNumericos.UI
             MainContent.Children.Add(view);
         }
 
+        private void MenuItem_InterpolacionLagrange_CLick(object sender, RoutedEventArgs e)
+        {
+            MainContent.Children.Clear();
+            var view = new InterpolacionLagrange();
+            Grid.SetRow(view, 0);
+            Grid.SetColumn(view, 0);
+            MainContent.Children.Add(view);
+        }
+
         private void btnTabular_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Children.Clear();
@@ -120,6 +129,11 @@ namespace MetodosNumericos.UI
             Grid.SetRow(view, 0);
             Grid.SetColumn(view, 0);
             MainContent.Children.Add(view);
+
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

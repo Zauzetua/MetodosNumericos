@@ -21,6 +21,11 @@ namespace MetodosNumericos.Core
             int n = x.Length;
             double resultado = 0.0;
 
+            if (n == 0 || y.Length == 0)
+            {
+                throw new ArgumentException("Los arreglos x e y no pueden estar vacios.");
+            }
+
             if (n != y.Length) 
             {
                 throw new ArgumentException("Los arreglos x e y deben tener la misma longitud.");
